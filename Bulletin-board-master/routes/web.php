@@ -31,7 +31,8 @@ Route::post('/added', 'Auth\Register\RegisterController@added');
 Route::get('/top','User\Post\PostsController@index');
 Route::get('/show','User\Post\PostsController@show');
 Route::get('/category','User\Post\PostsController@category');
-Route::post('/category','User\Post\PostsController@add')->name('categoryadd');
+Route::post('/categoryadd','User\Post\PostsController@add')->name('categoryadd');
+Route::post('/categoryaddsub','User\Post\PostsController@addsub')->name('categoryaddsub');
 
 Route::get('/create','User\Post\PostsController@create');
 Route::get('/update','User\Post\PostsController@update');

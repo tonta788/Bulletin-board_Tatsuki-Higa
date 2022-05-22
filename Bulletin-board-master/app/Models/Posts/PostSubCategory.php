@@ -12,4 +12,6 @@ class PostSubCategory extends Model
         'post_main_category_id',
         'sub_category',
     ];
+
+
 }

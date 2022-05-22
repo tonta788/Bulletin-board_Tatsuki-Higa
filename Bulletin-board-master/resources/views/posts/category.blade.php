@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 
-<form action="{{ url('category') }}" enctype="multipart/form-data" method="post">
+<form action="{{ url('categoryadd') }}" enctype="multipart/form-data" method="post">
   @csrf
 <div>
 <label>新規メインカテゴリー</label>
@@ -18,27 +18,29 @@
 </div>
 </form>
 
-<form>
+<form action="{{ url('categoryaddsub') }}" enctype="multipart/form-data" method="post">
+  @csrf
+<div class="form-group">
+<label for="category-id">{{ __('メインカテゴリー') }}</label>
 <div>
-<label>新規メインカテゴリー</label>
+<select name="MainCategory">
+    @foreach($main_categories as $main_categories)
+        <option value="{{ $main_categories->id }}">{{ $main_categories->main_category }}</option>
+    @endforeach
+</select>
 </div>
-<div>
-<input type="text" name="main-category">
 </div>
+
 <div>
 <label>新規サブカテゴリー</label>
 </div>
 <div>
-<input type="text" name="sub-category">
+<input type="text" name="newSubCategory">
 </div>
 <div>
 <button type=submit>登録</button>
 </div>
 </form>
 
-
-<div>
-<h2>カテゴリー一覧</h2>
-</div>
 
 @endsection
