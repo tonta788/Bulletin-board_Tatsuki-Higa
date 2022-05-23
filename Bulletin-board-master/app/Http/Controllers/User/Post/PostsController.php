@@ -20,7 +20,16 @@ class PostsController extends Controller
 
     public function category(){
         $main_categories = \DB::table('post_main_categories')->get();
-        return view('posts.category',['main_categories' => $main_categories]);
+        $postMainCategories = PostMainCategory::all();
+        $postSubCategories = PostSubCategory::query()
+            ->whereIn('post_main_category_id', $postMainCategories->pluck('id')->toArray())
+            ->get();
+            $postMainCategories = $postMainCategories->map(function (PostMainCategory $postMainCategory) use ($postSubCategories) {
+            $subs = $postSubCategories->where('post_main_category_id', $postMainCategory->id);
+            $postMainCategory->setAttribute('postSubCategories', $subs);
+            return $postMainCategory;
+        });
+        return view('posts.category',['main_categories' => $main_categories,'post_main_categories' => $postMainCategories]);
     }
 
     public function add(Request $request){
@@ -49,11 +58,18 @@ class PostsController extends Controller
             'sub_category' => $sub_category,
         ]);
         return redirect('/category');
+    }
 
-}
+    public function delete($id){
+        \DB::table('post_sub_categories')
+            ->where('id', $id)
+            ->delete();
 
-    public function create(){
-        return view('posts.create');
+        return redirect('/category');
+    }
+
+    public function post(){
+        return view('posts.post');
     }
 
     public function update(){

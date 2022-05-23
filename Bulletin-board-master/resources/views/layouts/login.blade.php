@@ -26,6 +26,7 @@
         <div id = "head">
             @yield('header')
         <button id="btn"><a href="/logout">ログアウト</a></button>
+        <button id="btn"><a href="/top">投稿一覧</a></button>
     </div>
     </header>
 
@@ -34,22 +35,7 @@
         <div id="main">
             @yield('content')
         </div>
-         <div class="submenu">
-             @yield('submenu')
-             <button id="btn"><a href="/category">カテゴリーを追加</a></button>
-             <button id="btn"><a href="/create">投稿</a></button>
 
-             <form>
-                 <input type="text" name="title" class="Form-searcharea">
-                 <button type="submit" class="btn-search">検索</button>
-                </form>
-                <div><button>いいねした投稿</button></div>
-                <div><button>自分の投稿</button></div>
-            </div>
-        <div class="category">
-             @yield('category')
-             <p>カテゴリー</p>
-        </div>
     </div>
 
 

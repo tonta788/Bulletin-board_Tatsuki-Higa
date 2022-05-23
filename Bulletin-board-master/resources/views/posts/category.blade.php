@@ -43,4 +43,21 @@
 </form>
 
 
+<div class="category-list">
+  <h2>カテゴリー一覧</h2>
+  <ul>
+  @foreach ($post_main_categories as $post_main_category)
+  <li>{{ $post_main_category->main_category }}
+    <button><a href="/category/{{$post_main_category->id}}/delete">削除</a></button>
+    <ul>
+      @foreach ($post_main_category->PostSubCategories as $post_sub_category)
+      <li>{{ $post_sub_category->sub_category }}
+      <button><a href="/category/{{$post_sub_category->id}}/delete">削除</a></button></li>
+      @endforeach
+    </ul>
+  </li>
+  @endforeach
+</ul>
+</div>
+
 @endsection

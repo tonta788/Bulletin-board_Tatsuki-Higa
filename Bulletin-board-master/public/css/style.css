@@ -20,3 +20,8 @@ html {
   margin: 0 0 0 auto;
   text-align: right;
 }
+
+.category-list {
+  display: inline-block;
+
+}
