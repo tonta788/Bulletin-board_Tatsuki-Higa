@@ -13,7 +13,8 @@ use Auth;
 class PostsController extends Controller
 {
      public function index(){
-        return view('posts.index');
+         $posts = \DB::table('posts')->get();
+        return view('posts.index',['posts' => $posts]);
     }
 
     public function show(){

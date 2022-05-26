@@ -5,15 +5,16 @@
 
 @section('content')
 <div class="post-block">
+@foreach ($posts as $post)
 <div class="post-content">
   <div>
-    <div class="post-name">〇〇さん</div>
+    <div class="post-name">{{ $post->id }}</div>
     <div>作成日</div>
     </div>
     <div>内容</div>
 </div>
 </div>
-
+@endforeach
 
 
  <button id="btn"><a href="/category">カテゴリーを追加</a></button>
