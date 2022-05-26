@@ -90,7 +90,8 @@ class PostsController extends Controller
             'post_sub_category_id' => $sub_category,
             'title' => $title,
             'post' => $post,
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
+            'event_at' => today()
         ]);
         return redirect('/post');
     }
