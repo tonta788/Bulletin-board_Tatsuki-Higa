@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Posts\PostMainCategory;
 use App\Models\Posts\PostSubCategory;
+use App\Models\Posts\Post;
+use Auth;
 
 class PostsController extends Controller
 {
@@ -69,8 +71,30 @@ class PostsController extends Controller
     }
 
     public function post(){
-        return view('posts.post');
+        $sub_categories = \DB::table('post_sub_categories')->get();
+        return view('posts.post',['sub_categories' => $sub_categories]);
     }
+
+    public function create(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:100',
+            'post' => 'required|string|max:5000',
+        ]);
+
+        $sub_category = $request->input('SubCategory');
+        $title = $request->input('newTitle');
+        $post = $request->input('newPost');
+        $request-> user_id = $request->user()->id;
+        \DB::table('posts')->insert([
+            'post_sub_category_id' => $sub_category,
+            'title' => $title,
+            'post' => $post,
+            'user_id' => Auth::id()
+        ]);
+        return redirect('/post');
+    }
+
 
     public function update(){
         return view('posts.update');

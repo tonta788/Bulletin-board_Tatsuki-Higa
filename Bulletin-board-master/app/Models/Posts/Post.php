@@ -18,4 +18,8 @@ class Post extends Model
         'event_at',
     ];
 
+    public function user(){
+        return $this->belongsTo('App\User');
+}
+
 }

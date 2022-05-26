@@ -16,4 +16,8 @@ class User extends Authenticatable
         'password',
         'admin_role',
     ];
+
+     public function posts(){
+    return $this->hasMany('App\Post');
+}
 }
