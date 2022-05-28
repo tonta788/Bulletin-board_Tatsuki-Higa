@@ -8,10 +8,10 @@
 @foreach ($posts as $post)
 <div class="post-content">
   <div>
-    <div class="post-name">{{ $post->id }}</div>
-    <div>作成日</div>
+    <div class="post-name">{{ $post->users()->username }}</div>
+    <div>{{ $post->event_at }}</div>
     </div>
-    <div>内容</div>
+    <div>{{ $post->title }}</div>
 </div>
 </div>
 @endforeach

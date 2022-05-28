@@ -13,7 +13,7 @@ use Auth;
 class PostsController extends Controller
 {
      public function index(){
-         $posts = \DB::table('posts')->get();
+         $posts = \DB::table('posts')->whereIn('user_id', Auth::user())->get();
         return view('posts.index',['posts' => $posts]);
     }
 
@@ -92,7 +92,7 @@ class PostsController extends Controller
             'title' => $title,
             'post' => $post,
             'user_id' => Auth::id(),
-            'event_at' => today()
+            'event_at' => date('Y-m-d')
         ]);
         return redirect('/post');
     }
