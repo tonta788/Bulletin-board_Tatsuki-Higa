@@ -22,7 +22,7 @@ class Post extends Model
         return $this->belongsTo('App\Models\Users\User');
     }
 
-    public function category(){
+    public function PostSubCategory(){
         return $this->belongsTo('App\Models\Posts\PostSubCategory');
     }
 

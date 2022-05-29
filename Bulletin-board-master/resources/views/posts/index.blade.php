@@ -12,7 +12,7 @@
     <div>{{ $post->event_at }}</div>
     </div>
     <div>{{ $post->title }}</div>
-    <div>{{ $post->category->sub_category }}</div>
+    <div>{{ $post->PostSubCategory->sub_category }}</div>
 </div>
 </div>
 @endforeach

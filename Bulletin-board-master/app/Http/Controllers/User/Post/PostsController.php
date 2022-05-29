@@ -14,8 +14,7 @@ use Auth;
 class PostsController extends Controller
 {
      public function index(){
-        $posts = Post::with(['PostSubCategory.Post']);
-        dd($posts);
+        $posts = Post::with(['PostSubCategory'])->get();
         return view('posts.index',['posts' => $posts]);
     }
 
