@@ -8,10 +8,11 @@
 @foreach ($posts as $post)
 <div class="post-content">
   <div>
-    <div class="post-name">{{ $post->users()->username }}</div>
+    <div class="post-name">{{ $post->user->username }}</div>
     <div>{{ $post->event_at }}</div>
     </div>
     <div>{{ $post->title }}</div>
+    <div>{{ $post->category->sub_category }}</div>
 </div>
 </div>
 @endforeach

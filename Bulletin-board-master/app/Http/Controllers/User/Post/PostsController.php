@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Posts\PostMainCategory;
 use App\Models\Posts\PostSubCategory;
 use App\Models\Posts\Post;
+use App\Models\Users\User;
 use Auth;
 
 class PostsController extends Controller
 {
      public function index(){
-         $posts = \DB::table('posts')->whereIn('user_id', Auth::user())->get();
+        $posts = Post::with(['PostSubCategory.Post']);
+        dd($posts);
         return view('posts.index',['posts' => $posts]);
     }
 
