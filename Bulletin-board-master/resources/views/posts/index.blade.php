@@ -11,13 +11,13 @@
     <div class="post-name">{{ $post->user->username }}</div>
     <div>{{ $post->event_at }}</div>
     </div>
-    <div>{{ $post->title }}</div>
+    <div><a href="/show/{{$post->id}}">{{ $post->title }}</a></div>
     <div>{{ $post->PostSubCategory->sub_category }}</div>
 </div>
 </div>
 @endforeach
 
-
+<div class="sidemenu">
  <button id="btn"><a href="/category">カテゴリーを追加</a></button>
              <button id="btn"><a href="/post">投稿</a></button>
 
@@ -27,5 +27,6 @@
                 </form>
                 <div><button id="btn">いいねした投稿</button></div>
                 <div><button id="btn">自分の投稿</button></div>
-            </div>
+</div>
+</div>
 @endsection

@@ -18,8 +18,9 @@ class PostsController extends Controller
         return view('posts.index',['posts' => $posts]);
     }
 
-    public function show(){
-        return view('posts.show');
+    public function show($id){
+        $posts = Post::find($id);
+        return view('posts.show',compact('posts'));
     }
 
     public function category(){
@@ -99,7 +100,9 @@ class PostsController extends Controller
     }
 
 
-    public function update(){
-        return view('posts.update');
+    public function update(PostSubCategory $Sub_Categories,$id){
+        $posts = Post::find($id);
+        $sub_category=\DB::table('post_sub_categories')->get();
+        return view('posts.update',compact('posts'),['sub_category' => $sub_category]);
     }
 }
