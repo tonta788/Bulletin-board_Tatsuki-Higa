@@ -4,12 +4,34 @@
 <h1>掲示板詳細画面</h1>
 @endsection
 @section('content')
+<div>
 @if ($posts->id)
  <div class="post-name">{{ $posts->user->username }}さん
  {{ $posts->event_at }}</div>
- <div>{{ $posts->title }}<button><a href="/update{{$posts->id}}">編集</a></button>
+ <div>{{ $posts->title }}<button><a href="/post{{$posts->id}}">編集</a></button></div>
  <div>{{ $posts->post }}</div>
 <div>{{ $posts->PostSubCategory->sub_category }}</div>
-
 @endif
+</div>
+
+<p>コメント一覧</p>
+@foreach($comments as $comments)
+@if ($posts->id == $comments->post_id)
+
+<div>{{ $comments->user->username }}さん　{{ $comments->event_at }}</div>
+<div>{{ $comments->comment }}</div>
+<button><a href="/comment{{$comments->id}}">編集</a></button>
+@endif
+@endforeach
+
+<form action="{{ url('post/comment') }}" method="post">
+  @csrf
+<input type="text" name="newComment" placeholder="コチラから入力できます">
+<input type="hidden" value="{{ $posts->user_id }}" name="user_id">
+<input type="hidden" value="{{ $posts->id }}" name="post_id">
+<div>
+<button type=submit>コメント</button>
+</div>
+</form>
+
 @endsection

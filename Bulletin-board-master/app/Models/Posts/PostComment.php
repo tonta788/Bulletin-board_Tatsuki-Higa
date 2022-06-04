@@ -17,8 +17,12 @@ class PostComment extends Model
         'event_at',
     ];
 
-    public function Comments(){
-		// 投稿はたくさんのコメントを持つ
-		return $this->hasMany('Comment', 'post_id');
+    public function post(){
+		return $this->belongsTo('App\Models\Posts\Post');
 	}
+
+     public function user(){
+        return $this->belongsTo('App\Models\Users\User');
+    }
+
 }

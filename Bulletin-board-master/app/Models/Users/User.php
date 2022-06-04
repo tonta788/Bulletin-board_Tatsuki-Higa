@@ -17,7 +17,11 @@ class User extends Authenticatable
         'admin_role',
     ];
 
-     public function posts(){
+    public function posts(){
     return $this->hasMany('App\Models\Posts\Post');
+    }
+
+    public function comments(){
+    return $this->hasMany('App\Models\Posts\PostComment');
 }
 }

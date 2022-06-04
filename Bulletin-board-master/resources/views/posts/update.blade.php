@@ -9,7 +9,7 @@
   @csrf
   <div>
    <label>サブカテゴリー</label>
-<select name="SubCategory">
+<select name="post_sub_category_id">
      @foreach($sub_category as $sub_category)
         <option value="{{ $sub_category->id }}">{{ $posts->PostSubCategory->sub_category }}</option>
     @endforeach
@@ -24,12 +24,13 @@
   <input type="text" name="post" value={{ $posts->post }}>
 </div>
 <div>
-<button type=submit>更新</button>
-</div>
-<div>
-<button type=submit>削除</button>
+<button type=submit><a href="/show/{{$posts->id}}">更新</a></button>
 </div>
 </form>
+<div>
+<button type=submit><a href="/post/{{$posts->id}}/delete">削除</a></button>
+</div>
+
 
 @endif
 @endsection

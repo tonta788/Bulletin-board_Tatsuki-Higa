@@ -38,6 +38,9 @@ Route::get('category/{id}/delete', 'User\Post\PostsController@delete');
 Route::get('/post','User\Post\PostsController@post');
 Route::post('post/create','User\Post\PostsController@create');
 
-Route::get('/update{id}', 'User\Post\PostsController@update');
+Route::get('/post{id}', 'User\Post\PostsController@updateshow');
+Route::get('/post/update{id}', 'User\Post\PostsController@postupdate');
+Route::get('/post/{id}/delete', 'User\Post\PostsController@postdelete');
 
-Route::get('/comment','User\Post\PostCommentsController@comment');
+Route::get('/comment{id}','User\Post\PostCommentsController@comment');
+Route::post('post/comment','User\Post\PostCommentsController@create');

@@ -9,6 +9,7 @@ use App\Models\Posts\PostMainCategory;
 use App\Models\Posts\PostSubCategory;
 use App\Models\Posts\Post;
 use App\Models\Users\User;
+use App\Models\Posts\PostComment;
 use Auth;
 
 class PostsController extends Controller
@@ -20,7 +21,8 @@ class PostsController extends Controller
 
     public function show($id){
         $posts = Post::find($id);
-        return view('posts.show',compact('posts'));
+        $comments = PostComment::all();
+        return view('posts.show',compact('posts'),['comments' => $comments]);
     }
 
     public function category(){
@@ -100,9 +102,32 @@ class PostsController extends Controller
     }
 
 
-    public function update(PostSubCategory $Sub_Categories,$id){
+    public function updateshow(PostSubCategory $Sub_Categories,$id){
         $posts = Post::find($id);
         $sub_category=\DB::table('post_sub_categories')->get();
         return view('posts.update',compact('posts'),['sub_category' => $sub_category]);
+
+    }
+
+    public function postupdate(Request $request,$id)
+    {
+
+        \DB::table('posts')
+            ->where('id', $id)
+            ->update([
+                'post_sub_category_id' => $request->input('post_sub_category_id'),
+                'title' => $request->input('title'),
+                'post' => $request->input('post'),
+                ]);
+
+        return back();
+    }
+
+    public function postdelete($id){
+        \DB::table('posts')
+            ->where('id', $id)
+            ->delete();
+
+        return redirect('/top');
     }
 }

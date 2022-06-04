@@ -26,4 +26,8 @@ class Post extends Model
         return $this->belongsTo('App\Models\Posts\PostSubCategory');
     }
 
+    public function comments(){
+    return $this->hasMany('App\Models\Posts\PostComment');
+}
+
 }
