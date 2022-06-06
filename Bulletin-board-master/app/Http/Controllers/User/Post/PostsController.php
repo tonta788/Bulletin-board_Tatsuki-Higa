@@ -25,6 +25,13 @@ class PostsController extends Controller
         return view('posts.show',compact('posts'),['comments' => $comments]);
     }
 
+    public function updateshow(PostSubCategory $Sub_Categories,$id){
+        $posts = Post::find($id);
+        $sub_category=\DB::table('post_sub_categories')->get();
+        return view('posts.update',compact('posts'),['sub_category' => $sub_category]);
+
+    }
+
     public function category(){
         $main_categories = \DB::table('post_main_categories')->get();
         $postMainCategories = PostMainCategory::all();
@@ -102,25 +109,21 @@ class PostsController extends Controller
     }
 
 
-    public function updateshow(PostSubCategory $Sub_Categories,$id){
-        $posts = Post::find($id);
-        $sub_category=\DB::table('post_sub_categories')->get();
-        return view('posts.update',compact('posts'),['sub_category' => $sub_category]);
-
-    }
-
     public function postupdate(Request $request,$id)
     {
+        $up_subcategory = $request->input('up_post_sub_category_id');
+        $up_title = $request->input('up_title');
+        $up_post = $request->input('up_post');
 
         \DB::table('posts')
             ->where('id', $id)
             ->update([
-                'post_sub_category_id' => $request->input('post_sub_category_id'),
-                'title' => $request->input('title'),
-                'post' => $request->input('post'),
+                'post_sub_category_id' => $up_subcategory,
+                'title' => $up_title,
+                'post' => $up_post,
                 ]);
 
-        return back();
+        return redirect('/top');
     }
 
     public function postdelete($id){

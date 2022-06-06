@@ -5,23 +5,23 @@
 @endsection
 @section('content')
 @if($posts->id)
-<form action="{{ url('post/update{id}') }}" enctype="multipart/form-data" method="post">
+<form action="{{ url('post/update'.$posts->id) }}" enctype="multipart/form-data" method="post">
   @csrf
   <div>
    <label>サブカテゴリー</label>
-<select name="post_sub_category_id">
+<select name="up_post_sub_category_id">
      @foreach($sub_category as $sub_category)
-        <option value="{{ $sub_category->id }}">{{ $posts->PostSubCategory->sub_category }}</option>
+        <option value="{{ $sub_category->id }}">{{ $sub_category->sub_category }}</option>
     @endforeach
 </select>
 </div>
  <div>
    <label>タイトル</label>
-   <input type="text" name="title" value={{ $posts->title }}>
+   <input type="text" name="up_title" value={{ $posts->title }}>
 </div>
 <div>
   <label>投稿内容</label>
-  <input type="text" name="post" value={{ $posts->post }}>
+  <input type="text" name="up_post" value={{ $posts->post }}>
 </div>
 <div>
 <button type=submit><a href="/show/{{$posts->id}}">更新</a></button>

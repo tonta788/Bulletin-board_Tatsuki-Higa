@@ -29,7 +29,7 @@ Route::post('/added', 'Auth\Register\RegisterController@added');
 
 // ログイン中のページ
 Route::get('/top','User\Post\PostsController@index');
-Route::get('/show/{id}','User\Post\PostsController@show');
+Route::get('/show/{id}','User\Post\PostsController@show')->name('show');
 Route::get('/category','User\Post\PostsController@category');
 Route::post('/categoryadd','User\Post\PostsController@add')->name('categoryadd');
 Route::post('/categoryaddsub','User\Post\PostsController@addsub')->name('categoryaddsub');
@@ -39,8 +39,10 @@ Route::get('/post','User\Post\PostsController@post');
 Route::post('post/create','User\Post\PostsController@create');
 
 Route::get('/post{id}', 'User\Post\PostsController@updateshow');
-Route::get('/post/update{id}', 'User\Post\PostsController@postupdate');
+Route::post('/post/update{id}', 'User\Post\PostsController@postupdate');
 Route::get('/post/{id}/delete', 'User\Post\PostsController@postdelete');
 
-Route::get('/comment{id}','User\Post\PostCommentsController@comment');
+Route::get('/comment{id}','User\Post\PostCommentsController@index');
 Route::post('post/comment','User\Post\PostCommentsController@create');
+Route::post('/comment/update{id}', 'User\Post\PostCommentsController@update');
+Route::get('/comment/{id}/delete', 'User\Post\PostCommentsController@delete');
