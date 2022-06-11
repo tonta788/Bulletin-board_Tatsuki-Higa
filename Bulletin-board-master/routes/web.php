@@ -30,6 +30,7 @@ Route::post('/added', 'Auth\Register\RegisterController@added');
 // ログイン中のページ
 Route::get('/top','User\Post\PostsController@index');
 Route::get('/show/{id}','User\Post\PostsController@show')->name('show');
+
 Route::get('/category','User\Post\PostsController@category');
 Route::post('/categoryadd','User\Post\PostsController@add')->name('categoryadd');
 Route::post('/categoryaddsub','User\Post\PostsController@addsub')->name('categoryaddsub');
@@ -46,3 +47,6 @@ Route::get('/comment{id}','User\Post\PostCommentsController@index');
 Route::post('post/comment','User\Post\PostCommentsController@create');
 Route::post('/comment/update{id}', 'User\Post\PostCommentsController@update');
 Route::get('/comment/{id}/delete', 'User\Post\PostCommentsController@delete');
+
+Route::get('/favorite/{post}', 'User\Post\PostFavoritesController@favorite')->name('favorite');
+Route::get('/unfavorite/{post}', 'User\Post\PostFavoritesController@unfavorite')->name('unfavorite');

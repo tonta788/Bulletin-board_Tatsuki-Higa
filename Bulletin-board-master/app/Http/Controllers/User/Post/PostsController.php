@@ -10,19 +10,26 @@ use App\Models\Posts\PostSubCategory;
 use App\Models\Posts\Post;
 use App\Models\Users\User;
 use App\Models\Posts\PostComment;
+use App\Models\Posts\PostFavorite;
 use Auth;
 
 class PostsController extends Controller
 {
-     public function index(){
+     public function index(Post $post){
         $posts = Post::with(['PostSubCategory'])->get();
-        return view('posts.index',['posts' => $posts]);
+        $favorite = PostFavorite::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
+        return view('posts.index',compact('favorite'),['posts' => $posts]);
     }
 
     public function show($id){
         $posts = Post::find($id);
         $comments = PostComment::all();
-        return view('posts.show',compact('posts'),['comments' => $comments]);
+
+        $count = session()->get('count', 0);
+        $count++;
+        session()->put('count', $count);
+
+        return view('posts.show',compact('posts'),['comments' => $comments,'count' => $count]);
     }
 
     public function updateshow(PostSubCategory $Sub_Categories,$id){
@@ -123,7 +130,7 @@ class PostsController extends Controller
                 'post' => $up_post,
                 ]);
 
-        return redirect('/top');
+        return redirect()->route('show',['id'=>$id]);
     }
 
     public function postdelete($id){

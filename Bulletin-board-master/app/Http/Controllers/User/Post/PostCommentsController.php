@@ -42,7 +42,7 @@ class PostCommentsController extends Controller
                 ['comment' => $up_comment]
             );
 
-        return redirect()->back();
+        return redirect()->route('show',['id'=>$id]);
     }
 
     public function delete($id){

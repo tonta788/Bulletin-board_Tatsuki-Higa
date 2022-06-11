@@ -24,7 +24,7 @@
   <input type="text" name="up_post" value={{ $posts->post }}>
 </div>
 <div>
-<button type=submit><a href="/show/{{$posts->id}}">更新</a></button>
+<button type=submit>更新</a></button>
 </div>
 </form>
 <div>

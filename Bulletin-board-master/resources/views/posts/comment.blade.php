@@ -12,7 +12,7 @@
   <input type="text" name="upComment" value="{{ $comment->comment }}">
 </div>
 <div>
-<button type=submit><a href="/show/{{$comment->post_id}}">更新</a></button>
+<button type=submit>更新</a></button>
 </div>
 </form>
 <div>

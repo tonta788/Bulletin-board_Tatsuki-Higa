@@ -6,15 +6,34 @@
 @section('content')
 <div class="post-block">
 @foreach ($posts as $post)
+
 <div class="post-content">
   <div>
+<div>{{ SESSION('count') }}View</div>
     <div class="post-name">{{ $post->user->username }}</div>
     <div>{{ $post->event_at }}</div>
     </div>
     <div><a href="/show/{{$post->id}}">{{ $post->title }}</a></div>
     <div>{{ $post->PostSubCategory->sub_category }}</div>
+    <div>コメント数{{ $post->comments()->get()->count() }}</div>
+    @if($favorite)
+    <a href="{{ route('unfavorite', $post) }}">
+		❤️
+		<span class="badge">
+			{{$post->PostFavorites()->get()->count()}}
+		</span>
+	</a>
+@else
+	<a href="{{ route('favorite', $post) }}">
+		❤️
+		<span class="badge">
+			{{$post->PostFavorites()->get()->count()}}
+		</span>
+	</a>
+@endif
 </div>
 </div>
+
 @endforeach
 
 <div class="sidemenu">
