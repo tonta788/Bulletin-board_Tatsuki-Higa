@@ -34,4 +34,8 @@ class Post extends Model
         return $this->hasMany('App\Models\Posts\PostFavorite');
     }
 
+    public function isLikedBy($user): bool {
+        return PostFavorite::where('user_id', $user->id)->where('post_id', $this->id)->first() !==null;
+    }
+
 }

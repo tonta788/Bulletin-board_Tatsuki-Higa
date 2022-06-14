@@ -14,10 +14,15 @@ class PostCommentsController extends Controller
 {
     public function index($id){
         $comment = PostComment::find($id);
+
         return view('posts.comment',compact('comment'));
     }
 
     public function create(Request $request){
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required|string|max:2500',
+        ]);
+        $validator->validate();
 
         $comment = $request->input('newComment');
         $user_id = $request->input('user_id');
@@ -32,9 +37,13 @@ class PostCommentsController extends Controller
         return back();
     }
 
-    public function update(Request $request,$id)
-    {
+    public function update(Request $request,$id){
+         $validator = Validator::make($request->all(), [
+            'upComment' => 'required|string|max:2500',
+        ]);
+        $validator->validate();
 
+        $post_id = $request->input('post_id');
         $up_comment = $request->input('upComment');
         \DB::table('post_comments')
             ->where('id', $id)
@@ -42,7 +51,7 @@ class PostCommentsController extends Controller
                 ['comment' => $up_comment]
             );
 
-        return redirect()->route('show',['id'=>$id]);
+        return redirect()->route('show',['id'=>$post_id]);
     }
 
     public function delete($id){

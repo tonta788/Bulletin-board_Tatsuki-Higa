@@ -7,6 +7,15 @@
 
 <form action="{{ url('categoryadd') }}" enctype="multipart/form-data" method="post">
   @csrf
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+   @endif
 <div>
 <label>新規メインカテゴリー</label>
 </div>
@@ -20,6 +29,15 @@
 
 <form action="{{ url('categoryaddsub') }}" enctype="multipart/form-data" method="post">
   @csrf
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+   @endif
 <div class="form-group">
 <label for="category-id">{{ __('メインカテゴリー') }}</label>
 <div>

@@ -7,6 +7,15 @@
 @if($posts->id)
 <form action="{{ url('post/update'.$posts->id) }}" enctype="multipart/form-data" method="post">
   @csrf
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+   @endif
   <div>
    <label>サブカテゴリー</label>
 <select name="up_post_sub_category_id">

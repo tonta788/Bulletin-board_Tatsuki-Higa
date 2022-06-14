@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 <div>
-@if ($posts->id)
+@if ($posts)
 
  <div class="post-name">{{ $posts->user->username }}さん
  {{ $posts->event_at }}</div>
@@ -30,6 +30,15 @@
 
 <form action="{{ url('post/comment') }}" method="post">
   @csrf
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+   @endif
 <input type="text" name="newComment" placeholder="コチラから入力できます">
 <input type="hidden" value="{{ $posts->user_id }}" name="user_id">
 <input type="hidden" value="{{ $posts->id }}" name="post_id">

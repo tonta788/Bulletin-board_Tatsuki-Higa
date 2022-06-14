@@ -40,3 +40,7 @@ html {
 /* .sidemenu {
   display: inline-block;
 } */
+
+.favorited {
+  color: pink;
+}

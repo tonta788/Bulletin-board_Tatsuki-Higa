@@ -7,9 +7,19 @@
 @if($comment->id)
 <form action="{{ url('/comment/update'.$comment->id) }}" method="post">
   @csrf
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+   @endif
 <div>
   <label>コメント</label>
   <input type="text" name="upComment" value="{{ $comment->comment }}">
+  <input type="hidden" name="post_id" value="{{ $comment->post_id }}">
 </div>
 <div>
 <button type=submit>更新</a></button>

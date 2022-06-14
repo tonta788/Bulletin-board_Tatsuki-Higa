@@ -16,21 +16,20 @@
     <div><a href="/show/{{$post->id}}">{{ $post->title }}</a></div>
     <div>{{ $post->PostSubCategory->sub_category }}</div>
     <div>コメント数{{ $post->comments()->get()->count() }}</div>
-    @if($favorite)
-    <a href="{{ route('unfavorite', $post) }}">
-		❤️
-		<span class="badge">
-			{{$post->PostFavorites()->get()->count()}}
-		</span>
-	</a>
-@else
-	<a href="{{ route('favorite', $post) }}">
-		❤️
-		<span class="badge">
-			{{$post->PostFavorites()->get()->count()}}
-		</span>
-	</a>
-@endif
+
+     @if (!$post->isLikedBy(Auth::user()))
+    <span class="favorites">
+        <a class="favorite-toggle" data-post-id="{{ $post->id }}"><i class="far fa-heart"></i></a>
+      <span class="favorite-counter">{{$post->favorites_count}}</span>
+    </span>
+  @else
+    <span class="favorites">
+        <a class="favorite-toggle favorited" data-post-id="{{ $post->id }}"><i class="fa fa-heart" style="color:red"></i></a>
+      <span class="favorite-counter">{{$post->favorites_count}}</span>
+    </span>
+  @endif
+
+
 </div>
 </div>
 
