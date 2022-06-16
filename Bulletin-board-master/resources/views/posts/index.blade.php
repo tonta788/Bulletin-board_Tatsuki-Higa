@@ -39,10 +39,17 @@
  <button id="btn"><a href="/category">カテゴリーを追加</a></button>
              <button id="btn"><a href="/post">投稿</a></button>
 
-             <form>
-                 <input type="text" name="title" class="Form-searcharea" id="btn">
+             <form action="{{ url('/top') }}" method="POST">
+                 <input type="text" name="search" class="Form-searcharea" id="btn">
                  <button type="submit" class="btn-search" id="btn">検索</button>
                 </form>
+
+                <div class="keyword">
+                  @if(isset($keyword))
+                  <p>検索ワード：{{$keyword}}</p>
+                  @endif
+                </div>
+
                 <div><button id="btn">いいねした投稿</button></div>
                 <div><button id="btn">自分の投稿</button></div>
 </div>

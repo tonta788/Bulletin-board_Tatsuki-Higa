@@ -17,7 +17,7 @@
       </div>
    @endif
 <div>
-  <label>コメント</label>
+  <label for="comment">コメント</label>
   <input type="text" name="upComment" value="{{ $comment->comment }}">
   <input type="hidden" name="post_id" value="{{ $comment->post_id }}">
 </div>

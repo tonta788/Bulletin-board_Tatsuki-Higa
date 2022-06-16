@@ -15,13 +15,21 @@ use Auth;
 
 class PostsController extends Controller
 {
-     public function index(Post $post){
+     public function index(Post $post,Request $request){
         $posts = Post::with(['PostSubCategory'])->get();
         $favorites = Post::with('PostFavorites')->orderBy('id', 'desc')->paginate(10);
         $param = [
         'favorites' => $favorites,
     ];
-        return view('posts.index',compact('favorites'),['posts' => $posts]);
+    $keyword = $request->input('search');
+        $query = Post::query();
+
+        if (!empty($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%");
+        }
+
+        $title = $query->orderBy('id', 'desc')->get();
+        return view('posts.index',compact('favorites','title','keyword'),['posts' => $posts]);
     }
 
     public function show($id){
@@ -152,5 +160,18 @@ class PostsController extends Controller
             ->delete();
 
         return redirect('/top');
+    }
+
+    public function search(Request $request){
+
+        $keyword = $request->input('search');
+        $query = Post::query();
+
+        if (!empty($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%");
+        }
+
+        $title = $query->orderBy('id', 'desc')->get();
+        return view('posts.index', compact('title','keyword'));
     }
 }

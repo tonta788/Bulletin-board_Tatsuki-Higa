@@ -50,3 +50,5 @@ Route::get('/comment/{id}/delete', 'User\Post\PostCommentsController@delete');
 
 Route::post('/favorite', 'User\Post\PostFavoritesController@favorite')->name('favorite');
 Route::get('/unfavorite/{post}', 'User\Post\PostFavoritesController@unfavorite')->name('unfavorite');
+
+Route::post('/search','User\Post\PostsController@search')->name('search');
