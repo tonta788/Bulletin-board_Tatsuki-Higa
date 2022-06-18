@@ -28,4 +28,26 @@ class User extends Authenticatable
     public function PostFavorites(){
     return $this->hasMany('App\Models\Posts\PostFavorite');
     }
+
+    public function isPostFavorite($postId)
+    {
+      return $this->PostFavorites()->where('post_id',$postId)->exists();
+    }
+
+    public function PostFavorite($postId)
+    {
+      if($this->isPostFavorite($postId)){
+        //もし既に「いいね」していたら何もしない
+      } else {
+        $this->PostFavorites()->attach($postId);
+      }
+}
+     public function unPostFavorite($postId)
+    {
+      if($this->isPostFavorite($postId)){
+        //もし既に「いいね」していたら消す
+        $this->PostFavorites()->detach($postId);
+      } else {
+      }
+}
 }

@@ -40,4 +40,15 @@ class PostFavoritesController extends Controller
         $favorite->delete();
         return back();
     }
+    // public function favorite($postId)
+    // {
+    //     Auth::user()->PostFavorite($postId);
+    //     return 'ok!'; //レスポンス内容
+    // }
+
+    // public function unfavorite($postId)
+    // {
+    //     Auth::user()->unPostFavorite($postId);
+    //     return 'ok!'; //レスポンス内容
+    // }
 }

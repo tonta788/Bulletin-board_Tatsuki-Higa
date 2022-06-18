@@ -21,15 +21,8 @@ class PostsController extends Controller
         $param = [
         'favorites' => $favorites,
     ];
-    $keyword = $request->input('search');
-        $query = Post::query();
 
-        if (!empty($keyword)) {
-            $query->where('title', 'LIKE', "%{$keyword}%");
-        }
-
-        $title = $query->orderBy('id', 'desc')->get();
-        return view('posts.index',compact('favorites','title','keyword'),['posts' => $posts]);
+        return view('posts.index',compact('favorites'),['posts' => $posts]);
     }
 
     public function show($id){
@@ -80,16 +73,15 @@ class PostsController extends Controller
 
     public function addsub(Request $request){
         $validator = Validator::make($request->all(), [
-            'post_main_category_id' => 'required',
             'sub_category' => 'required|string|max:100|unique:post_sub_categories',
         ]);
         $validator->validate();
 
-        $main_category = $request->input('MainCategory');
+        $main_category_id = $request->input('MainCategory');
         $sub_category = $request->input('newSubCategory');
 
         \DB::table('post_sub_categories')->insert([
-            'post_main_category_id' => $main_category,
+            'post_main_category_id' => $main_category_id,
             'sub_category' => $sub_category,
         ]);
         return redirect('/category');
@@ -115,7 +107,6 @@ class PostsController extends Controller
             'title' => 'required|string|max:100',
             'post' => 'required|string|max:5000',
         ]);
-        $validator->validate();
 
         $sub_category = $request->input('SubCategory');
         $title = $request->input('newTitle');
@@ -165,13 +156,20 @@ class PostsController extends Controller
     public function search(Request $request){
 
         $keyword = $request->input('search');
-        $query = Post::query();
+        $post_query = Post::query();
+        $sub_category_query = PostSubCategory::query();
 
-        if (!empty($keyword)) {
-            $query->where('title', 'LIKE', "%{$keyword}%");
+
+        if (!empty($keyword)){
+            $post_query->where('title', 'LIKE', "%{$keyword}%")
+            ->orWhere('post', 'LIKE', "%{$keyword}%");
+        }
+        if (!empty($keyword)){
+            $sub_category_query->where('sub_category', '=', "$keyword")->first();
         }
 
-        $title = $query->orderBy('id', 'desc')->get();
-        return view('posts.index', compact('title','keyword'));
+        $posts = $post_query->get();
+        $sub_category = $sub_category_query->get();
+        return view('posts.index', compact('posts','keyword','sub_category'));
     }
 }

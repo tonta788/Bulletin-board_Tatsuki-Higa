@@ -1,2 +1,3 @@
 require('./bootstrap');
-require('./favorite.js')
+require('./favorite.js');
+<script>alert('hello');</script>

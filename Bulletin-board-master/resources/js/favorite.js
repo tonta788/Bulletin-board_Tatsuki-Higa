@@ -1,4 +1,5 @@
 $(function () {
+  alert('hello');
   let favorite = $('.favorite-toggle'); //favorite-toggleのついたiタグを取得し代入。
   let favoritePostId; //変数を宣言（なんでここで？）
   favorite.on('click', function () { //onはイベントハンドラー
@@ -26,3 +27,19 @@ $(function () {
       });
   });
 });
+
+// function favorite(postId) {
+//   $.ajax({
+//     headers: {
+//       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//     },
+//     url: `/favorite/${postId}`,
+//     type: "POST",
+//   })
+//     .done(function (data, status, xhr) {
+//       console.log(data);
+//     })
+//     .fail(function (xhr, status, error) {
+//       console.log();
+//     });
+// }
