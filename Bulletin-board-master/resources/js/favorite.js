@@ -1,5 +1,7 @@
 $(function () {
-  alert('hello');
+  $('.favorite-toggle').on('click', function () {
+    alert('hello');
+  })
   let favorite = $('.favorite-toggle'); //favorite-toggleのついたiタグを取得し代入。
   let favoritePostId; //変数を宣言（なんでここで？）
   favorite.on('click', function () { //onはイベントハンドラー
