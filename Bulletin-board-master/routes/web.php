@@ -49,6 +49,6 @@ Route::post('/comment/update{id}', 'User\Post\PostCommentsController@update');
 Route::get('/comment/{id}/delete', 'User\Post\PostCommentsController@delete');
 
 Route::post('/favorite', 'User\Post\PostFavoritesController@favorite')->name('favorite');
-Route::post('/unfavorite', 'User\Post\PostFavoritesController@unfavorite')->name('unfavorite');
+// Route::post('/unfavorite', 'User\Post\PostFavoritesController@unfavorite')->name('unfavorite');
 
 Route::get('/search','User\Post\PostsController@search')->name('search');

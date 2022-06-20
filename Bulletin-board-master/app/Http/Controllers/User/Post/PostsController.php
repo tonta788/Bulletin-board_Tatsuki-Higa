@@ -17,12 +17,12 @@ class PostsController extends Controller
 {
      public function index(Post $post,Request $request){
         $posts = Post::with(['PostSubCategory'])->get();
-        $favorites = Post::with('PostFavorites')->orderBy('id', 'desc')->paginate(10);
+        $favorites = Post::withCount('PostFavorites');
         $param = [
         'favorites' => $favorites,
     ];
 
-        return view('posts.index',compact('favorites'),['posts' => $posts]);
+        return view('posts.index',$param,['posts' => $posts]);
     }
 
     public function show($id){
@@ -156,20 +156,16 @@ class PostsController extends Controller
     public function search(Request $request){
 
         $keyword = $request->input('search');
-        $post_query = Post::query();
-        $sub_category_query = PostSubCategory::query();
-
 
         if (!empty($keyword)){
-            $post_query->where('title', 'LIKE', "%{$keyword}%")
-            ->orWhere('post', 'LIKE', "%{$keyword}%");
-        }
-        if (!empty($keyword)){
-            $sub_category_query->where('sub_category', '=', "$keyword")->first();
-        }
-
-        $posts = $post_query->get();
-        $sub_category = $sub_category_query->get();
-        return view('posts.index', compact('posts','keyword','sub_category'));
+            $posts = Post::whereHas('PostSubCategory',function($query) use ($keyword){
+            $query->where('sub_category','=',"$keyword")
+            ->orWhere('post', 'LIKE', "%{$keyword}%")
+            ->orWhere('title', 'LIKE', "%{$keyword}%");
+        })->get();
     }
+
+        return view('posts.index', compact('posts','keyword'));
+    }
+
 }

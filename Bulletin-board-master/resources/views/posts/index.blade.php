@@ -24,7 +24,6 @@
 @section('content')
 
 <div class="post-block">
-<p class=favorite-toggle>ボタン</p>
 @forelse ($posts as $post)
 
 <div class="post-content">
@@ -36,18 +35,19 @@
     <div><a href="/show/{{$post->id}}">{{ $post->title }}</a></div>
     <div>{{ $post->PostSubCategory->sub_category }}</div>
     <div>コメント数{{ $post->comments()->get()->count() }}</div>
-    <!-- <button onclick="favorite({{$post->id}})"><i class="far fa-heart"></i></button> -->
 
      @if (!$post->isLikedBy(Auth::user()))
     <span class="favorites">
-        <a class="favorite-toggle" data-post-id="{{ $post->id }}"><i class="far fa-heart"></i></a>
+        <i class="far fa-heart favorite-toggle" data-post-id="{{ $post->id }}"></i>
       <span class="favorite-counter">{{$post->favorites_count}}</span>
     </span>
+    {{ $post->PostFavorites()->count() }}
   @else
     <span class="favorites">
-        <a class="favorite-toggle favorited" data-post-id="{{ $post->id }}"><i class="fa fa-heart" style="color:red"></i></a>
+        <i class="fas fa-heart favorite-toggle favorited" data-post-id="{{ $post->id }}"></i>
       <span class="favorite-counter">{{$post->favorites_count}}</span>
     </span>
+    {{ $post->PostFavorites()->count() }}
   @endif
 
 
@@ -59,11 +59,5 @@
     @endforelse
 
 </div>
-<script src="{{ asset('js/favorite.js') }} " rel="stylesheet"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>$(function () {
-  $('.favorite-toggle').on('click', function () {
-    alert('hello');
-  })
-})</script>
+
 @endsection
