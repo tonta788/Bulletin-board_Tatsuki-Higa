@@ -2,6 +2,7 @@
 @section('header')
 <h1>掲示板投稿一覧</h1>
 
+
 <div class="sidemenu">
  <button id="btn"><a href="/category">カテゴリーを追加</a></button>
              <button id="btn"><a href="/post">投稿</a></button>
@@ -17,14 +18,18 @@
                   @endif
                 </div>
 
-                <div><button id="btn">いいねした投稿</button></div>
-                <div><button id="btn">自分の投稿</button></div>
+                <div><button  id="btn" >いいねした投稿</button></div>
+
+                <form action="{{ url('/showmypost') }}" method="get">
+                <div><button type="submit" id="btn" name="mypost">自分の投稿</button></div>
+                </form>
 </div>
 @endsection
 @section('content')
 
 <div class="post-block">
 @forelse ($posts as $post)
+
 
 <div class="post-content">
   <div>
@@ -51,13 +56,19 @@
   @endif
 
 
+
+
 </div>
 </div>
 
 @empty
         <p>No posts</p>
+
     @endforelse
 
 </div>
+<p id="star"><i class="fas fa-star"></i></p>
+
+
 
 @endsection

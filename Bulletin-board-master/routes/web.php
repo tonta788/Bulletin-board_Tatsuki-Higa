@@ -52,3 +52,4 @@ Route::post('/favorite', 'User\Post\PostFavoritesController@favorite')->name('fa
 // Route::post('/unfavorite', 'User\Post\PostFavoritesController@unfavorite')->name('unfavorite');
 
 Route::get('/search','User\Post\PostsController@search')->name('search');
+Route::get('/showmypost','User\Post\PostsController@showmypost');

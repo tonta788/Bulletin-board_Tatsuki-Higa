@@ -15,7 +15,13 @@ $(function () {
     })
 
       .done(function (data) {
-        $this.toggleClass('favorited'); //favoritedクラスのON/OFF切り替え。
+        let d = JSON.parse(data);
+        if ((d.name === 'far' || d.name === 'fas')) {
+          favorited.target.innerHTML =
+            `<i class=\"${d.name} fa-heart\"></i>`;
+        }
+        favorited.target.disabled = false;
+        // $this.toggleClass('favorited'); //favoritedクラスのON/OFF切り替え。
         $this.next().html(data.review_favorites_count);
       })
       //通信失敗した時の処理
@@ -25,18 +31,24 @@ $(function () {
   });
 });
 
-// function favorite(postId) {
-//   $.ajax({
-//     headers: {
-//       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-//     },
-//     url: `/favorite/${postId}`,
-//     type: "POST",
-//   })
-//     .done(function (data, status, xhr) {
-//       console.log(data);
-//     })
-//     .fail(function (xhr, status, error) {
-//       console.log();
-//     });
-// }
+
+
+
+
+
+
+
+
+
+$("#star").on("click", function () {
+  $(this).toggleClass("on");
+  if ($('#star').hasClass('on')) {
+    // ハンバーガーアイコンを管理
+    $('.far fa-star').hide();
+    $('.fas fa-star').show();
+  } else {
+    // ハンバーガーアイコンを管理
+    $('.fas fa-star').hide();
+    $('.far fa-star').show();
+  }
+});

@@ -168,4 +168,11 @@ class PostsController extends Controller
         return view('posts.index', compact('posts','keyword'));
     }
 
+    public function showmypost(){
+        if(isset($_GET['mypost'])) {
+            // ($post->user_id == Auth::user()->id)
+        $posts = Post::where('user_id')->orderBy('created_at', 'desc')->get();
+        }
+        return view('posts.index',['posts'=>$posts]);
+    }
 }
