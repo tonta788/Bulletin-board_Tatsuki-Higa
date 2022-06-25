@@ -26,6 +26,18 @@
 <div>{{ $comments->comment }}</div>
 <button><a href="/comment{{$comments->id}}">編集</a></button>
 @endif
+
+@if(is_null($already[$comments->id]))
+  <button type="button" class="fav" data-fav="{{$comments->id}}">
+      <i class="far fa-heart"></i>
+      {{$comments->cnt}}
+  </button>
+@else
+  <button type="button" class="fav" data-fav="{{$comments->id}}">
+      <i class="fas fa-heart"></i>
+      {{$comments->cnt}}
+  </button>
+@endif
 @endforeach
 
 <form action="{{ url('post/comment') }}" method="post">

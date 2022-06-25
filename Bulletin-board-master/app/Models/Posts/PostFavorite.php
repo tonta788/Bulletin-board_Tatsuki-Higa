@@ -21,4 +21,8 @@ class PostFavorite extends Model
 		return $this->belongsTo('App\Models\Posts\Post');
 	}
 
+    public function comment(){
+    return $this->belongsTo('App\Models\Posts\PostComment');
+    }
+
 }
