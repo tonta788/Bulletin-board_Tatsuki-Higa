@@ -16,13 +16,9 @@ use Auth;
 class PostsController extends Controller
 {
      public function index(Post $post,Request $request){
-        $posts = Post::with(['PostSubCategory'])->get();
-        $favorites = Post::withCount('PostFavorites');
-        $param = [
-        'favorites' => $favorites,
-    ];
+        $posts = Post::with(['PostSubCategory'])->withCount('PostFavorites')->get();
 
-        return view('posts.index',$param,['posts' => $posts]);
+        return view('posts.index',['posts' => $posts]);
     }
 
     public function show($id){
@@ -58,10 +54,9 @@ class PostsController extends Controller
     }
 
     public function add(Request $request){
-        $validator = Validator::make($request->all(), [
-            'main_category' => 'required|string|max:100|unique:post_main_categories',
-        ]);
-        $validator->validate();
+        // $request->validate([
+        //     'main_category' => 'required|string|max:100|unique:post_main_categories',
+        // ]);
 
         $main_category = $request->input('newMainCategory');
         $request-> id = $request->user()->id;
@@ -72,10 +67,9 @@ class PostsController extends Controller
     }
 
     public function addsub(Request $request){
-        $validator = Validator::make($request->all(), [
-            'sub_category' => 'required|string|max:100|unique:post_sub_categories',
-        ]);
-        $validator->validate();
+        // $request->validate([
+        //     'sub_category' => 'required|string|max:100|unique:post_sub_categories',
+        // ]);
 
         $main_category_id = $request->input('MainCategory');
         $sub_category = $request->input('newSubCategory');
@@ -102,11 +96,11 @@ class PostsController extends Controller
 
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'post_sub_category_id' => 'required',
-            'title' => 'required|string|max:100',
-            'post' => 'required|string|max:5000',
-        ]);
+        // $request->validate([
+        //     'post_sub_category_id' => 'required',
+        //     'title' => 'required|string|max:100',
+        //     'post' => 'required|string|max:5000',
+        // ]);
 
         $sub_category = $request->input('SubCategory');
         $title = $request->input('newTitle');
@@ -168,8 +162,9 @@ class PostsController extends Controller
         return view('posts.index', compact('posts','keyword'));
     }
 
-    public function showmypost(){
-        if(isset($_GET['mypost'])) {
+    public function showmypost(Request $request){
+        $mypost = $request->input('mypost');
+        if(isset($mypost)) {
             // ($post->user_id == Auth::user()->id)
         $posts = Post::where('user_id')->orderBy('created_at', 'desc')->get();
         }

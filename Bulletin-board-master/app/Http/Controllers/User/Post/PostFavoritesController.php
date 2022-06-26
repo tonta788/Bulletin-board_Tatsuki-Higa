@@ -27,17 +27,12 @@ class PostFavoritesController extends Controller
         PostFavorite::where('post_id', $post_id)->where('user_id', $user_id)->delete();
     }
     //5.この投稿の最新の総いいね数を取得
-    $post_favorites_count = Post::withCount('PostFavorites')->findOrFail($post_id)->favorites_count;
+    $post_favorites= Post::withCount('PostFavorites')->findOrFail($post_id);
+    $favorite_count = $post_favorites->$post_favorites_count;
     $param = [
-        'post_favorites_count' => $post_favorites_count,
+        'favorite_count' => $favorite_count,
     ];
     return response()->json($param); //6.JSONデータをjQueryに返す
 }
 
-    public function unfavorite(Post $post, Request $request){
-        $user=Auth::user()->id;
-        $favorite=PostFavorite::where('post_id', $post->id)->where('user_id', $user)->first();
-        $favorite->delete();
-        return back();
-    }
 }

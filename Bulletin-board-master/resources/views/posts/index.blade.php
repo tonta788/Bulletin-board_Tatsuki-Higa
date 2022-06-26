@@ -20,7 +20,7 @@
 
                 <div><button  id="btn" >いいねした投稿</button></div>
 
-                <form action="{{ url('/showmypost') }}" method="get">
+                <form action="{{ url('/showmypost') }}">
                 <div><button type="submit" id="btn" name="mypost">自分の投稿</button></div>
                 </form>
 </div>
@@ -44,15 +44,13 @@
      @if (!$post->isLikedBy(Auth::user()))
     <span class="favorites">
         <i class="far fa-heart favorite-toggle" data-post-id="{{ $post->id }}"></i>
-      <span class="favorite-counter">{{$post->favorites_count}}</span>
+      <span class="favorite-counter">{{$post->post_favorites_count}}</span>
     </span>
-    {{ $post->PostFavorites()->count() }}
   @else
     <span class="favorites">
         <i class="fas fa-heart favorite-toggle favorited" data-post-id="{{ $post->id }}"></i>
-      <span class="favorite-counter">{{$post->favorites_count}}</span>
+      <span class="favorite-counter">{{$post->post_favorites_count}}</span>
     </span>
-    {{ $post->PostFavorites()->count() }}
   @endif
 
 
@@ -67,7 +65,7 @@
     @endforelse
 
 </div>
-<p id="star"><i class="fas fa-star"></i></p>
+
 
 
 
