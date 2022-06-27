@@ -156,7 +156,7 @@ class PostsController extends Controller
             $query->where('sub_category','=',"$keyword")
             ->orWhere('post', 'LIKE', "%{$keyword}%")
             ->orWhere('title', 'LIKE', "%{$keyword}%");
-        })->get();
+        })->withCount('PostFavorites')->get();
     }
 
         return view('posts.index', compact('posts','keyword'));
@@ -164,10 +164,10 @@ class PostsController extends Controller
 
     public function showmypost(Request $request){
         $mypost = $request->input('mypost');
-        if(isset($mypost)) {
-            // ($post->user_id == Auth::user()->id)
-        $posts = Post::where('user_id')->orderBy('created_at', 'desc')->get();
+
+        if(!empty($mypost)) {
+            $posts = Post::where('user_id',\Auth::user()->id)->withCount('PostFavorites')->get();
         }
-        return view('posts.index',['posts'=>$posts]);
+        return view('posts.index',['posts' => $posts]);
     }
 }

@@ -35,4 +35,14 @@ class PostFavoritesController extends Controller
     return response()->json($param); //6.JSONデータをjQueryに返す
 }
 
+
+    public function liked(Request $request){
+        $liked = $request->input('liked');
+
+        if(!empty($liked)) {
+            $posts = Post::where('user_id',\Auth::user()->id)->withCount('PostFavorites')->get();
+        }
+        return view('posts.index',['posts' => $posts]);
+}
+
 }

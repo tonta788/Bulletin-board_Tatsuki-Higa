@@ -18,10 +18,14 @@
                   @endif
                 </div>
 
+                <form action="{{ url('/liked') }}">
                 <div><button  id="btn" >いいねした投稿</button></div>
+                <input type="hidden" name="liked" value="{{ Auth::id() }}">
+                </form>
 
                 <form action="{{ url('/showmypost') }}">
-                <div><button type="submit" id="btn" name="mypost">自分の投稿</button></div>
+                <div><button type="submit" id="btn">自分の投稿</button></div>
+                <input type="hidden" name="mypost" value="{{ Auth::id() }}">
                 </form>
 </div>
 @endsection
