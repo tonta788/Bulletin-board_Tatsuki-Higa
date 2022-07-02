@@ -18,11 +18,15 @@ class PostFavorite extends Model
     }
 
     public function post(){
-		return $this->belongsTo('App\Models\Posts\Post');
+		return $this->belongsTo('App\Models\Posts\Post','post_id', 'id');
 	}
 
     public function comment(){
     return $this->belongsTo('App\Models\Posts\PostComment');
     }
+
+    public function PostFavorites(){
+    return $this->belongsToMany('App\Models\Posts\PostFavorite');
+}
 
 }

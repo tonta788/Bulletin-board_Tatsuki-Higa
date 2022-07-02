@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Posts\Post;
 use App\Models\Users\User;
 use App\Models\Posts\PostFavorite;
+use App\Models\Posts\PostMainCategory;
+use App\Models\Posts\PostSubCategory;
 use Auth;
 
 
@@ -40,8 +42,15 @@ class PostFavoritesController extends Controller
         $liked = $request->input('liked');
 
         if(!empty($liked)) {
-            $posts = Post::where('user_id',\Auth::user()->id)->withCount('PostFavorites')->get();
+            // $posts = Post::with('PostFavorites')->where('PostFavorites.user_id','=',$liked)->withCount('PostFavorites')->get();
+            // $posts = Post::with('user')->where('posts.user_id','=',$liked)->withCount('PostFavorites')->get();
+
+            // $posts = PostFavorite::with(['post'])->where('user_id','=',$liked)->withCount('PostFavorites')->get();
+
+            $posts = PostFavorite::where('posts.user_id','=',$liked,'post.id','=','post_id')->withCount('PostFavorites')->get();
+
         }
+        // dd($posts);
         return view('posts.index',['posts' => $posts]);
 }
 
