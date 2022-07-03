@@ -25,4 +25,12 @@ class PostComment extends Model
         return $this->belongsTo('App\Models\Users\User');
     }
 
+     public function PostCommentFavorites() {
+        return $this->hasMany('App\Models\Posts\PostCommentFavorite');
+    }
+
+    public function isLikedBy($user): bool {
+        return PostCommentFavorite::where('user_id', $user->id)->where('post_comment_id', $this->id)->first() !==null;
+    }
+
 }

@@ -30,7 +30,7 @@ class PostFavoritesController extends Controller
     }
     //5.この投稿の最新の総いいね数を取得
     $post_favorites= Post::withCount('PostFavorites')->findOrFail($post_id);
-    $favorite_count = $post_favorites->$post_favorites_count;
+    $favorite_count = $post_favorites->post_favorites_count;
     $param = [
         'favorite_count' => $favorite_count,
     ];

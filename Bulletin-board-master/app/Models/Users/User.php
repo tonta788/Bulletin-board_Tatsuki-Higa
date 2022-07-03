@@ -29,5 +29,8 @@ class User extends Authenticatable
     return $this->hasMany('App\Models\Posts\PostFavorite');
     }
 
+    public function PostCommentFavorites(){
+    return $this->hasMany('App\Models\Posts\PostCommentFavorite');
+    }
 
 }

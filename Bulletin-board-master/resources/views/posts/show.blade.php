@@ -15,6 +15,8 @@
 <div>{{ $posts->PostSubCategory->sub_category }}</div>
 <div>コメント数{{ $posts->comments()->get()->count() }}</div>
 
+
+
 @endif
 </div>
 
@@ -25,8 +27,19 @@
 <div>{{ $comments->user->username }}さん　{{ $comments->event_at }}</div>
 <div>{{ $comments->comment }}</div>
 <button><a href="/comment{{$comments->id}}">編集</a></button>
-@endif
 
+@if (!$comments->isLikedBy(Auth::user()))
+    <span class="favorites">
+        <i class="far fa-heart favorite-comment" data-comment-id="{{ $comments->id }}"></i>
+      <span class="favorite-counter">{{$comments->post_comment_favorites_count}}</span>
+    </span>
+  @else
+    <span class="favorites">
+        <i class="fas fa-heart favorite-comment favorited-comment" data-comment-id="{{ $comments->id }}"></i>
+      <span class="favorite-counter">{{$comments->post_comment_favorites_count}}</span>
+    </span>
+  @endif
+@endif
 @endforeach
 
 <form action="{{ url('post/comment') }}" method="post">
@@ -47,5 +60,7 @@
 <button type=submit>コメント</button>
 </div>
 </form>
+
+<p class=on><i class="fas fa-star"></i></p>
 
 @endsection
