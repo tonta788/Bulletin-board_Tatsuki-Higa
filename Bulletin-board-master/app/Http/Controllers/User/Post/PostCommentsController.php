@@ -19,10 +19,9 @@ class PostCommentsController extends Controller
     }
 
     public function create(Request $request){
-        // $validator = Validator::make($request->all(), [
-        //     'comment' => 'required|string|max:2500',
-        // ]);
-        // $validator->validate();
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required|string|max:2500',
+        ]);
 
         $comment = $request->input('newComment');
         $user_id = $request->input('user_id');

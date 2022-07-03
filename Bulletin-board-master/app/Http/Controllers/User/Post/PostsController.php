@@ -54,12 +54,11 @@ class PostsController extends Controller
     }
 
     public function add(Request $request){
-        // $request->validate([
-        //     'main_category' => 'required|string|max:100|unique:post_main_categories',
-        // ]);
+        $validator = validator::make($request->all(),[
+            'main_category' => 'required|string|max:100|unique:post_main_categories',
+        ]);
 
         $main_category = $request->input('newMainCategory');
-        $request-> id = $request->user()->id;
         \DB::table('post_main_categories')->insert([
             'main_category' => $main_category,
         ]);
@@ -67,9 +66,10 @@ class PostsController extends Controller
     }
 
     public function addsub(Request $request){
-        // $request->validate([
-        //     'sub_category' => 'required|string|max:100|unique:post_sub_categories',
-        // ]);
+        $validator = validator::make($request->all(),[
+            'post_main_category_id' => 'required',
+            'sub_category' => 'required|string|max:100|unique:post_sub_categories',
+        ]);
 
         $main_category_id = $request->input('MainCategory');
         $sub_category = $request->input('newSubCategory');
@@ -81,7 +81,15 @@ class PostsController extends Controller
         return redirect('/category');
     }
 
-    public function delete($id){
+    public function delete_main($id){
+        \DB::table('post_main_categories')
+            ->where('id', $id)
+            ->delete();
+
+        return redirect('/category');
+    }
+
+    public function delete_sub($id){
         \DB::table('post_sub_categories')
             ->where('id', $id)
             ->delete();
@@ -96,11 +104,11 @@ class PostsController extends Controller
 
     public function create(Request $request)
     {
-        // $request->validate([
-        //     'post_sub_category_id' => 'required',
-        //     'title' => 'required|string|max:100',
-        //     'post' => 'required|string|max:5000',
-        // ]);
+        $validator = validator::make($request->all(),[
+            'post_sub_category_id' => 'required',
+            'title' => 'required|string|max:100',
+            'post' => 'required|string|max:5000',
+        ]);
 
         $sub_category = $request->input('SubCategory');
         $title = $request->input('newTitle');
