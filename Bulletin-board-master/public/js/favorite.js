@@ -34,9 +34,10 @@ $(function () {
 });
 
 $(function () {
-  $('.favorite-comment').on('click', function () {
+  $('.favorite_comment').on('click', function () {
+    // alert('hello');
     $this = $(this);
-    favoriteCommentId = $this.data('comment-id');
+    favoriteCommentId = $this.data('comments-id');
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -50,12 +51,12 @@ $(function () {
 
       .done(function (data) {
 
-        if ($this.hasClass('favorited-comment')) {
-          $this.removeClass('favorited-comment');
+        if ($this.hasClass('favorited_comment')) {
+          $this.removeClass('favorited_comment');
           $this.removeClass('fas');
           $this.addClass('far');
         } else {
-          $this.addClass('favorited-comment');
+          $this.addClass('favorited_comment');
           $this.removeClass('far');
           $this.addClass('fas');
         }

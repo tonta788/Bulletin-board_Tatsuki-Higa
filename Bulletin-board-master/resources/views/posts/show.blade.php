@@ -29,12 +29,12 @@
 
 @if (!$comments->isLikedBy(Auth::user()))
     <span class="favorites">
-        <i class="far fa-heart favorite-comment" data-comment-id="{{ $comments->id }}"></i>
+        <i class="far fa-heart favorite_comment" data-comments-id="{{ $comments->id }}"></i>
       <span class="favorite-counter">{{$comments->post_comment_favorites_count}}</span>
     </span>
   @else
     <span class="favorites">
-        <i class="fas fa-heart favorite-comment favorited-comment" data-comment-id="{{ $comments->id }}"></i>
+        <i class="fas fa-heart favorite_comment favorited_comment" data-comments-id="{{ $comments->id }}"></i>
       <span class="favorite-counter">{{$comments->post_comment_favorites_count}}</span>
     </span>
   @endif
