@@ -70,6 +70,21 @@
 
 </div>
 
+<div class="category-list">
+  <h2>カテゴリー</h2>
+  <ul>
+  @foreach ($post_main_categories as $post_main_category)
+  <li>{{ $post_main_category->main_category }}
+    <ul>
+      @foreach ($post_main_category->PostSubCategories as $post_sub_category)
+      <li>{{ $post_sub_category->sub_category }}
+      @endforeach
+    </ul>
+  </li>
+  @endforeach
+</ul>
+</div>
+
 
 
 

@@ -22,8 +22,10 @@ html {
 }
 
 .category-list {
-  display: inline-block;
-
+  margin-right: 0;
+  margin-left: auto;
+  width: 25%;
+  display: block;
 }
 
 .post-block {

@@ -17,8 +17,18 @@ class PostsController extends Controller
 {
      public function index(Post $post,Request $request){
         $posts = Post::with(['PostSubCategory'])->withCount('PostFavorites')->get();
+        $main_categories = \DB::table('post_main_categories')->get();
+        $postMainCategories = PostMainCategory::all();
+        $postSubCategories = PostSubCategory::query()
+            ->whereIn('post_main_category_id', $postMainCategories->pluck('id')->toArray())
+            ->get();
+            $postMainCategories = $postMainCategories->map(function (PostMainCategory $postMainCategory) use ($postSubCategories) {
+            $subs = $postSubCategories->where('post_main_category_id', $postMainCategory->id);
+            $postMainCategory->setAttribute('postSubCategories', $subs);
+            return $postMainCategory;
+        });
 
-        return view('posts.index',['posts' => $posts]);
+        return view('posts.index',['posts' => $posts,'main_categories' => $main_categories,'post_main_categories' => $postMainCategories]);
     }
 
     public function show($id){
@@ -50,6 +60,7 @@ class PostsController extends Controller
             $postMainCategory->setAttribute('postSubCategories', $subs);
             return $postMainCategory;
         });
+        // dump($postMainCategories);
         return view('posts.category',['main_categories' => $main_categories,'post_main_categories' => $postMainCategories]);
     }
 
@@ -176,7 +187,18 @@ class PostsController extends Controller
         if(!empty($mypost)) {
             $posts = Post::where('user_id',\Auth::user()->id)->withCount('PostFavorites')->get();
         }
-        return view('posts.index',['posts' => $posts]);
+        $main_categories = \DB::table('post_main_categories')->get();
+        $postMainCategories = PostMainCategory::all();
+        $postSubCategories = PostSubCategory::query()
+            ->whereIn('post_main_category_id', $postMainCategories->pluck('id')->toArray())
+            ->get();
+            $postMainCategories = $postMainCategories->map(function (PostMainCategory $postMainCategory) use ($postSubCategories) {
+            $subs = $postSubCategories->where('post_main_category_id', $postMainCategory->id);
+            $postMainCategory->setAttribute('postSubCategories', $subs);
+            return $postMainCategory;
+        });
+
+        return view('posts.index',['posts' => $posts,'main_categories' => $main_categories,'post_main_categories' => $postMainCategories]);
     }
 
 

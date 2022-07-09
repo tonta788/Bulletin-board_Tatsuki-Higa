@@ -16,7 +16,6 @@
 <div>コメント数{{ $posts->comments()->get()->count() }}</div>
 
 
-
 @endif
 </div>
 

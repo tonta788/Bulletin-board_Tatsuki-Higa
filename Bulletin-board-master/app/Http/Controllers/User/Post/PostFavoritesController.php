@@ -42,16 +42,22 @@ class PostFavoritesController extends Controller
         $liked = $request->input('liked');
 
         if(!empty($liked)) {
-            // $posts = Post::with('PostFavorites')->where('PostFavorites.user_id','=',$liked)->withCount('PostFavorites')->get();
-            // $posts = Post::with('user')->where('posts.user_id','=',$liked)->withCount('PostFavorites')->get();
-
-            // $posts = PostFavorite::with(['post'])->where('user_id','=',$liked)->withCount('PostFavorites')->get();
-
-            $posts = PostFavorite::where('posts.user_id','=',$liked,'post.id','=','post_id')->withCount('PostFavorites')->get();
-
+            // $posts = PostFavorite::where('posts.user_id','=',$liked,'post.id','=','post_id')->withCount('PostFavorites')->get();
+            $posts = Post::with('PostFavorites')->WhereHas('PostFavorites',function($query){
+                $query->where('user_id',Auth::id());})->withCount('PostFavorites')->get();
         }
-        // dd($posts);
-        return view('posts.index',['posts' => $posts]);
+        $main_categories = \DB::table('post_main_categories')->get();
+        $postMainCategories = PostMainCategory::all();
+        $postSubCategories = PostSubCategory::query()
+            ->whereIn('post_main_category_id', $postMainCategories->pluck('id')->toArray())
+            ->get();
+            $postMainCategories = $postMainCategories->map(function (PostMainCategory $postMainCategory) use ($postSubCategories) {
+            $subs = $postSubCategories->where('post_main_category_id', $postMainCategory->id);
+            $postMainCategory->setAttribute('postSubCategories', $subs);
+            return $postMainCategory;
+        });
+
+        return view('posts.index',['posts' => $posts,'main_categories' => $main_categories,'post_main_categories' => $postMainCategories]);
 }
 
 }
