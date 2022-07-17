@@ -57,9 +57,6 @@
     </span>
   @endif
 
-
-
-
 </div>
 </div>
 

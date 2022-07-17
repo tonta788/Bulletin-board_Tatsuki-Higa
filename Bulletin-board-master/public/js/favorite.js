@@ -35,7 +35,6 @@ $(function () {
 
 $(function () {
   $('.favorite_comment').on('click', function () {
-    // alert('hello');
     $this = $(this);
     favoriteCommentId = $this.data('comments-id');
     $.ajax({
@@ -67,8 +66,4 @@ $(function () {
         console.log('fail');
       });
   });
-});
-
-$('.on').click(function () {
-  alert('hello');
 });

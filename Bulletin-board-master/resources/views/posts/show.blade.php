@@ -60,6 +60,6 @@
 </div>
 </form>
 
-<p class=on><i class="fas fa-star"></i></p>
+
 
 @endsection

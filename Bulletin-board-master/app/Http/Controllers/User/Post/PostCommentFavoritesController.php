@@ -19,7 +19,7 @@ class PostCommentFavoritesController extends Controller
     $already_favorited = PostCommentFavorite::where('user_id', $user_id)->where('post_comment_id', $post_comment_id)->first();
 
     if (!$already_favorited) {
-        $favorite = new PostCommentFavorite;
+        $commentfavorite = new PostCommentFavorite;
         $commentfavorite->post_comment_id = $post_comment_id; //PostFavoriteインスタンスにpost_id,user_idをセット
         $commentfavorite->user_id = $user_id;
         $commentfavorite->save();
@@ -30,7 +30,7 @@ class PostCommentFavoritesController extends Controller
     $post_comment_favorites= PostComment::withCount('PostCommentFavorites')->findOrFail($post_comment_id);
     $comment_favorite_count = $post_comment_favorites->post_comment_favorites_count;
     $param = [
-        'favorite_count' => $favorite_count,
+        'comment_favorite_count' => $comment_favorite_count,
     ];
     return response()->json($param);
 }

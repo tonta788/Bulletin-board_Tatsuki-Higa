@@ -50,6 +50,7 @@ class PostsController extends Controller
     }
 
     public function category(){
+        $posts = Post::all();
         $main_categories = \DB::table('post_main_categories')->get();
         $postMainCategories = PostMainCategory::all();
         $postSubCategories = PostSubCategory::query()
@@ -60,8 +61,8 @@ class PostsController extends Controller
             $postMainCategory->setAttribute('postSubCategories', $subs);
             return $postMainCategory;
         });
-        // dump($postMainCategories);
-        return view('posts.category',['main_categories' => $main_categories,'post_main_categories' => $postMainCategories]);
+        dump($postMainCategories);
+        return view('posts.category',['main_categories' => $main_categories,'post_main_categories' => $postMainCategories,'posts' => $posts]);
     }
 
     public function add(Request $request){

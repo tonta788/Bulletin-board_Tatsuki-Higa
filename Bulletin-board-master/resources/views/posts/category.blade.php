@@ -63,21 +63,26 @@
 
 <div class="category-list">
   <h2>カテゴリー一覧</h2>
+
   <ul>
   @foreach ($post_main_categories as $post_main_category)
   <li>{{ $post_main_category->main_category }}
-    @if ($post_main_category == $post_main_category->PostSubCategories)
+    @if ($post_main_category == $post_main_category->PostSubCategories->isEmpty())
     <button><a href="/main_category/{{$post_main_category->id}}/delete">削除</a></button>
     @endif
     <ul>
       @foreach ($post_main_category->PostSubCategories as $post_sub_category)
+
       <li>{{ $post_sub_category->sub_category }}
+          @if ($post_sub_category->posts->isEmpty())
       <button><a href="/sub_category/{{$post_sub_category->id}}/delete">削除</a></button></li>
+      @endif
       @endforeach
     </ul>
   </li>
   @endforeach
 </ul>
+
 </div>
 
 @endsection
