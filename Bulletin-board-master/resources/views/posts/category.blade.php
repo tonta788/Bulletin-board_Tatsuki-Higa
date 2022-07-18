@@ -72,7 +72,6 @@
     @endif
     <ul>
       @foreach ($post_main_category->PostSubCategories as $post_sub_category)
-
       <li>{{ $post_sub_category->sub_category }}
           @if ($post_sub_category->posts->isEmpty())
       <button><a href="/sub_category/{{$post_sub_category->id}}/delete">削除</a></button></li>

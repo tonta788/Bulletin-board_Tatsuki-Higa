@@ -9,11 +9,22 @@
 
  <div class="post-name">{{ $posts->user->username }}さん
  {{ $posts->event_at }}</div>
-<div>{{ SESSION('count') }}View</div>
+<div>{{ $posts->action_logs()->count() }}View</div>
  <div>{{ $posts->title }}<button><a href="/post{{$posts->id}}">編集</a></button></div>
  <div>{{ $posts->post }}</div>
 <div>{{ $posts->PostSubCategory->sub_category }}</div>
 <div>コメント数{{ $posts->comments()->get()->count() }}</div>
+@if (!$posts->isLikedBy(Auth::user()))
+    <span class="favorites">
+        <i class="far fa-heart favorite-toggle" data-post-id="{{ $posts->id }}"></i>
+      <span class="favorite-counter">{{$posts->PostFavorites->count()}}</span>
+    </span>
+  @else
+    <span class="favorites">
+        <i class="fas fa-heart favorite-toggle favorited" data-post-id="{{ $posts->id }}"></i>
+      <span class="favorite-counter">{{$posts->PostFavorites->count()}}</span>
+    </span>
+  @endif
 
 
 @endif

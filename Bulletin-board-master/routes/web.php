@@ -37,6 +37,7 @@ Route::post('/categoryaddsub','User\Post\PostsController@addsub')->name('categor
 Route::get('main_category/{id}/delete', 'User\Post\PostsController@delete_main');
 Route::get('sub_category/{id}/delete', 'User\Post\PostsController@delete_sub');
 
+
 Route::get('/post','User\Post\PostsController@post');
 Route::post('post/create','User\Post\PostsController@create');
 

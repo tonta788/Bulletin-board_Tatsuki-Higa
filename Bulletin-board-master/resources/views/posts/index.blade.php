@@ -4,7 +4,9 @@
 
 
 <div class="sidemenu">
+  @if(Auth::user()->admin_role == 1)
  <button id="btn"><a href="/category">カテゴリーを追加</a></button>
+ @endif
              <button id="btn"><a href="/post">投稿</a></button>
 
              <form action="{{ url('/search') }}" method="get">
@@ -37,7 +39,7 @@
 
 <div class="post-content">
   <div>
-<div>{{ SESSION('count') }}View</div>
+<div>{{ $post->action_logs()->count() }}View</div>
     <div class="post-name">{{ $post->user->username }}</div>
     <div>{{ $post->event_at }}</div>
     </div>

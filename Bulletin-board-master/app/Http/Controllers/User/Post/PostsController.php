@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\ActionLogs\ActionLog;
 use App\Models\Posts\PostMainCategory;
 use App\Models\Posts\PostSubCategory;
 use App\Models\Posts\Post;
@@ -31,15 +32,18 @@ class PostsController extends Controller
         return view('posts.index',['posts' => $posts,'main_categories' => $main_categories,'post_main_categories' => $postMainCategories]);
     }
 
-    public function show($id){
+    public function show($id,Request $request){
         $posts = Post::find($id);
-        $comments = PostComment::all();
+        $comments = PostComment::withCount('PostCommentFavorites')->get();
 
-        $count = session()->get('count', 0);
-        $count++;
-        session()->put('count', $count);
+        $data = [
+            'user_id' => Auth::id(),
+            'post_id' => $id,
+            'event_at' => date('Y-m-d'),
+        ];
+        Actionlog::create($data);
 
-        return view('posts.show',compact('posts'),['comments' => $comments,'count' => $count]);
+        return view('posts.show',['posts'=>$posts,'comments' => $comments]);
     }
 
     public function updateshow(PostSubCategory $Sub_Categories,$id){
@@ -61,7 +65,6 @@ class PostsController extends Controller
             $postMainCategory->setAttribute('postSubCategories', $subs);
             return $postMainCategory;
         });
-        dump($postMainCategories);
         return view('posts.category',['main_categories' => $main_categories,'post_main_categories' => $postMainCategories,'posts' => $posts]);
     }
 

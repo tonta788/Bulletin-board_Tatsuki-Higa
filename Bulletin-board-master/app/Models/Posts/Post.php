@@ -18,6 +18,10 @@ class Post extends Model
         'event_at',
     ];
 
+    public function action_logs(){
+    return $this->hasMany('App\Models\ActionLogs\ActionLog');
+    }
+
     public function user(){
         return $this->belongsTo('App\Models\Users\User');
     }
