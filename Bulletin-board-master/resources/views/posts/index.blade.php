@@ -1,7 +1,6 @@
 @extends('layouts.login')
-@section('header')
 <h1>掲示板投稿一覧</h1>
-
+@section('header')
 
 <div class="sidemenu">
   @if(Auth::user()->admin_role == 1)
@@ -30,8 +29,7 @@
                 <input type="hidden" name="mypost" value="{{ Auth::id() }}">
                 </form>
 </div>
-@endsection
-@section('content')
+
 
 <div class="post-block">
 @forelse ($posts as $post)

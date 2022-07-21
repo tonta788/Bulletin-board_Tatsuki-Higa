@@ -69,19 +69,21 @@ class PostsController extends Controller
     }
 
     public function add(Request $request){
-        $validator = validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'main_category' => 'required|string|max:100|unique:post_main_categories',
         ]);
 
         $main_category = $request->input('newMainCategory');
+
         \DB::table('post_main_categories')->insert([
             'main_category' => $main_category,
         ]);
         return redirect('/category');
+
     }
 
     public function addsub(Request $request){
-        $validator = validator::make($request->all(),[
+       $validator = Validator::make($request->all(),[
             'post_main_category_id' => 'required',
             'sub_category' => 'required|string|max:100|unique:post_sub_categories',
         ]);

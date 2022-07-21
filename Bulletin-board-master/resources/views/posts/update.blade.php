@@ -1,9 +1,7 @@
 @extends('layouts.login')
-
-@section('header')
 <h1>投稿編集画面</h1>
-@endsection
-@section('content')
+@section('header')
+
 @if($posts->id)
 <form action="{{ url('post/update'.$posts->id) }}" enctype="multipart/form-data" method="post">
   @csrf

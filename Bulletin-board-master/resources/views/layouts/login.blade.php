@@ -30,19 +30,13 @@
 
     <header>
         <div id = "head">
-            @yield('header')
         <button id="btn"><a href="/logout">ログアウト</a></button>
         <button id="btn"><a href="/top">投稿一覧</a></button>
     </div>
+    @yield('header')
     </header>
 
 
-    <div id="contents">
-        <div id="main">
-            @yield('content')
-        </div>
-
-    </div>
     <footer>
 
     </footer>

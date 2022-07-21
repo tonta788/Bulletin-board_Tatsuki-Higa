@@ -1,9 +1,7 @@
 @extends('layouts.login')
-
-@section('header')
 <h1>コメント編集画面</h1>
-@endsection
-@section('content')
+@section('header')
+
 @if($comment->id)
 <form action="{{ url('/comment/update'.$comment->id) }}" method="post">
   @csrf

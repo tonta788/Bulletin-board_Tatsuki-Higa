@@ -1,18 +1,16 @@
 @extends('layouts.login')
-
-@section('header')
 <h1>カテゴリー追加画面</h1>
-@endsection
-@section('content')
+@section('header')
+
+
 
 <form action="{{ url('categoryadd') }}" enctype="multipart/form-data" method="post">
   @csrf
-  @if ($errors->any())
+  @if ($errors->has('main_category'))
+
       <div class="alert alert-danger">
           <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
+                  <li>{{ $errors->first('main_category') }}</li>
           </ul>
       </div>
    @endif
@@ -29,15 +27,7 @@
 
 <form action="{{ url('categoryaddsub') }}" enctype="multipart/form-data" method="post">
   @csrf
-  @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div>
-   @endif
+
 <div class="form-group">
 <label for="category-id">{{ __('メインカテゴリー') }}</label>
 <div>
@@ -52,6 +42,13 @@
 <div>
 <label>新規サブカテゴリー</label>
 </div>
+ @if ($errors->has('sub_category'))
+      <div class="alert alert-danger">
+          <ul>
+                  <li>{{ $errors->first('sub_category') }}</li>
+          </ul>
+      </div>
+   @endif
 <div>
 <input type="text" name="newSubCategory">
 </div>
