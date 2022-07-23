@@ -15,6 +15,7 @@ header {
 
 #row {
   display: flex;
+  font-size: 20px;
 }
 
 .sidemenu {
@@ -40,7 +41,7 @@ header {
 .main-block {
   display: flex;
   flex-flow: column wrap;
-  width: 70%;
+  width: 60%;
 }
 
 
