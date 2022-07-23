@@ -1,6 +1,7 @@
 @extends('layouts.login')
-<h1>カテゴリー追加画面</h1>
+
 @section('header')
+<h1>カテゴリー追加画面</h1>
 
 
 

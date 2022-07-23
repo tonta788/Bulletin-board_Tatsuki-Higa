@@ -1,7 +1,7 @@
 @extends('layouts.login')
-<h1>掲示板詳細画面</h1>
-@section('header')
 
+@section('header')
+<h1>掲示板詳細画面</h1>
 
 <div>
 @if ($posts)

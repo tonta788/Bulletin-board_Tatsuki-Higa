@@ -29,11 +29,12 @@
 
 
     <header>
-        <div id = "head">
-        <button id="btn"><a href="/logout">ログアウト</a></button>
-        <button id="btn"><a href="/top">投稿一覧</a></button>
+
+        <div id="head">
+        <button><a href="/top">投稿一覧</a></button>
+        <a href="/logout" class="btn btn-primary">ログアウト</a>
     </div>
-    @yield('header')
+@yield('header')
     </header>
 
 

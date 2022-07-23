@@ -4,15 +4,28 @@ html {
   height: 100%;
 }
 
-#btn {
-  display: block;
-  margin: 0 0 0 auto;
+header {
+  height: 100px;
 }
 
-.submenu {
-  display: block;
-  margin: 0 0 0 auto;
+#head {
   text-align: right;
+  margin: 10px;
+}
+
+#row {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.sidemenu {
+  flex: 0 0 20%;
+  text-align: right;
+  margin: 10px;
+}
+
+.side {
+  margin-top: 10px;
 }
 
 .category {
@@ -28,7 +41,7 @@ html {
   display: block;
 }
 
-.post-block {
+.main-block {
   display: flex;
 }
 
@@ -38,10 +51,6 @@ html {
   margin: 2em 0;
   border: solid 1px #000000;
 }
-
-/* .sidemenu {
-  display: inline-block;
-} */
 
 .favorited {
   color: red;

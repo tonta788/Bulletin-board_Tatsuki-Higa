@@ -1,6 +1,7 @@
 @extends('layouts.login')
-<h1>新規投稿画面</h1>
+
 @section('header')
+<h1>新規投稿画面</h1>
 
 
 <form action="{{ url('post/create') }}" method="post">
