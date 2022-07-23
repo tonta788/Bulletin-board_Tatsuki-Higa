@@ -10,12 +10,12 @@
 
     <div class="post-content">
       <div>
-        <div>{{ $post->action_logs()->count() }}View</div>
         <div class="post-name">{{ $post->user->username }}さん</div>
         <div>{{ $post->event_at }}</div>
+        <div>{{ $post->action_logs()->count() }}View</div>
       </div>
-        <div><a href="/show/{{$post->id}}" class="btn btn-primary">{{ $post->title }}</a></div>
-        <div>{{ $post->PostSubCategory->sub_category }}</div>
+        <div>{{ $post->title }}</div>
+        <div><a href="/show/{{$post->id}}" class="btn btn-primary">{{ $post->PostSubCategory->sub_category }}</a></div>
         <div>コメント数{{ $post->comments()->get()->count() }}</div>
 
      @if (!$post->isLikedBy(Auth::user()))
