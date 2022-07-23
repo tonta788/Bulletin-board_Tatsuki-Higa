@@ -15,11 +15,10 @@ header {
 
 #row {
   display: flex;
-  flex-flow: row wrap;
 }
 
 .sidemenu {
-  flex: 0 0 20%;
+  flex: auto;
   text-align: right;
   margin: 10px;
 }

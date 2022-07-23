@@ -29,20 +29,16 @@
        </span>
      @endif
     </div>
-</div>
 
 @empty
-        <p>No posts</p>
-
+        <p>投稿はありません</p>
     @endforelse
+</div>
 
-    </div>
-<div class="sidemenu">
-
-  @if(Auth::user()->admin_role == 1)
-
-   <div class="side"><a href="/category" class="btn btn-danger">カテゴリーを追加</a></div>
- @endif
+ <div class="sidemenu">
+   @if(Auth::user()->admin_role == 1)
+    <div class="side"><a href="/category" class="btn btn-danger">カテゴリーを追加</a></div>
+   @endif
     <div class="side"><a href="/post" class="btn btn-primary">投稿</a></div>
              <div class="side">
                <form action="{{ url('/search') }}" method="get">
@@ -81,9 +77,9 @@
            @endforeach
             </ul>
         </div>
+ </div>
 
 </div>
-
 </div>
 
 
