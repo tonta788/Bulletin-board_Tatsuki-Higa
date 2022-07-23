@@ -39,7 +39,9 @@ header {
 
 .main-block {
   display: flex;
+  flex-flow: column wrap;
 }
+
 
 .post-content {
   display: inline-block;
