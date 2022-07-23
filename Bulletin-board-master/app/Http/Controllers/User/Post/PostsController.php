@@ -174,6 +174,18 @@ class PostsController extends Controller
 
     public function search(Request $request){
 
+        $main_categories = \DB::table('post_main_categories')->get();
+        $postMainCategories = PostMainCategory::all();
+        $postSubCategories = PostSubCategory::query()
+            ->whereIn('post_main_category_id', $postMainCategories->pluck('id')->toArray())
+            ->get();
+            $postMainCategories = $postMainCategories->map(function (PostMainCategory $postMainCategory) use ($postSubCategories) {
+            $subs = $postSubCategories->where('post_main_category_id', $postMainCategory->id);
+            $postMainCategory->setAttribute('postSubCategories', $subs);
+            return $postMainCategory;
+        });
+
+
         $keyword = $request->input('search');
 
         if (!empty($keyword)){
@@ -184,7 +196,7 @@ class PostsController extends Controller
         })->withCount('PostFavorites')->get();
     }
 
-        return view('posts.index', compact('posts','keyword'));
+        return view('posts.index', compact('posts','keyword'),['posts' => $posts,'main_categories' => $main_categories,'post_main_categories' => $postMainCategories]);
     }
 
     public function showmypost(Request $request){

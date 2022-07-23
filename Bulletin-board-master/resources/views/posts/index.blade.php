@@ -10,7 +10,7 @@
     <div class="post-content">
       <div>
         <div>{{ $post->action_logs()->count() }}View</div>
-        <div class="post-name">{{ $post->user->username }}</div>
+        <div class="post-name">{{ $post->user->username }}さん</div>
         <div>{{ $post->event_at }}</div>
       </div>
         <div><a href="/show/{{$post->id}}" class="btn btn-primary">{{ $post->title }}</a></div>
