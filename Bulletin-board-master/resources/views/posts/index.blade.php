@@ -1,8 +1,9 @@
 @extends('layouts.login')
 
 @section('header')
-<div id="row">
 <h1>掲示板投稿一覧</h1>
+<div id="row">
+
 
 <div class="main-block">
  @forelse ($posts as $post)
