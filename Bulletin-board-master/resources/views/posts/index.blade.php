@@ -10,25 +10,25 @@
 
     <div class="post-content">
       <div>
-        <div class="post-name">{{ $post->user->username }}さん</div>
-        <div>{{ $post->event_at }}</div>
-        <div>{{ $post->action_logs()->count() }}View</div>
+        {{ $post->user->username }}さん　{{ $post->event_at }}　{{ $post->action_logs()->count() }}View
       </div>
         <div>{{ $post->title }}</div>
-        <div><a href="/show/{{$post->id}}" class="btn btn-primary">{{ $post->PostSubCategory->sub_category }}</a></div>
-        <div>コメント数{{ $post->comments()->get()->count() }}</div>
+        <div>
+          <a href="/show/{{$post->id}}" class="btn btn-primary">{{ $post->PostSubCategory->sub_category }}</a>　
+          コメント数{{ $post->comments()->get()->count() }}　
 
-     @if (!$post->isLikedBy(Auth::user()))
-       <span class="favorites">
-       <i class="far fa-heart favorite-toggle" data-post-id="{{ $post->id }}"></i>
-       <span class="favorite-counter">{{$post->post_favorites_count}}</span>
-       </span>
-     @else
-       <span class="favorites">
-       <i class="fas fa-heart favorite-toggle favorited" data-post-id="{{ $post->id }}"></i>
-       <span class="favorite-counter">{{$post->post_favorites_count}}</span>
-       </span>
-     @endif
+           @if (!$post->isLikedBy(Auth::user()))
+            <span class="favorites">
+             <i class="far fa-heart favorite-toggle" data-post-id="{{ $post->id }}"></i>
+             <span class="favorite-counter">{{$post->post_favorites_count}}</span>
+            </span>
+           @else
+            <span class="favorites">
+             <i class="fas fa-heart favorite-toggle favorited" data-post-id="{{ $post->id }}"></i>
+             <span class="favorite-counter">{{$post->post_favorites_count}}</span>
+            </span>
+           @endif
+        </div>
     </div>
 
     @empty
