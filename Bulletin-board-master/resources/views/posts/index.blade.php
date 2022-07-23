@@ -30,7 +30,7 @@
      @endif
     </div>
 
-@empty
+    @empty
         <p>投稿はありません</p>
     @endforelse
 </div>
