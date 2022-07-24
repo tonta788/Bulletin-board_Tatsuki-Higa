@@ -30,32 +30,35 @@
    @endif
 
 
+  <div>
 
-    @foreach($comments as $comments)
-     @if ($posts->id == $comments->post_id)
-     <div class="comment-block">
-       <div>{{ $comments->user->username }}さん　{{ $comments->created_at->format('Y年m月d日') }}　
-         @if(Auth::user()->id == $comments->user_id )
-          <a href="/comment{{$comments->id}}" class="btn btn-danger">編集</a></div>
-         @endif
+     @foreach($comments as $comments)
+      @if ($posts->id == $comments->post_id)
+      <div class="comment-block">
+        <div>{{ $comments->user->username }}さん　{{$comments->created_at->format('Y年m月d日') }}　
+          @if(Auth::user()->id == $comments->user_id )
+           <a href="/comment{{$comments->id}}" class="btn btn-danger">編集</a>
+        </div>
+          @endif
         <div>{{ $comments->comment }}　
 
-        @if (!$comments->isLikedBy(Auth::user()))
-         <span class="favorites">
-         <i class="far fa-heart favorite_comment" data-comments-id="{{ $comments->id }}"></i>
-         <span class="favorite-counter">{{$comments->post_comment_favorites_count}}</span>
-         </span>
-        @else
-         <span class="favorites">
-         <i class="fas fa-heart favorite_comment favorited_comment" data-comments-id="{{ $comments->id }}"></i>
-         <span class="favorite-counter">{{$comments->post_comment_favorites_count}}</span>
-         </span>
-        @endif
-       </div>
+          @if (!$comments->isLikedBy(Auth::user()))
+           <span class="favorites">
+           <i class="far fa-heart favorite_comment" data-comments-id="{{ $comments->id }}"></i>
+           <span class="favorite-counter">{{$comments->post_comment_favorites_count}}</span>
+           </span>
+          @else
+           <span class="favorites">
+           <i class="fas fa-heart favorite_comment favorited_comment" data-comments-id="{{ $comments->id }}"></i>
+           <span class="favorite-counter">{{$comments->post_comment_favorites_count}}</span>
+           </span>
+          @endif
+        </div>
        @endif
       </div>
-      </div>
-   @endforeach
+    @endforeach
+    </div>
+
 
 
   <div>
@@ -79,7 +82,7 @@
    </form>
   </div>
 
-</div>
+ </div>
 </div>
 
 @endsection
