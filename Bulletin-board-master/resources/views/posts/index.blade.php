@@ -10,7 +10,7 @@
 
     <div class="post-content">
       <div>
-        {{ $post->user->username }}さん　{{ $post->event_at }}　{{ $post->action_logs()->count() }}View
+        {{ $post->user->username }}さん　{{ $post->created_at->format('Y年m月d日') }}　{{ $post->action_logs()->count() }}View
       </div>
         <div>{{ $post->title }}</div>
         <div>
@@ -64,19 +64,25 @@
                 <input type="hidden" name="mypost" value="{{ Auth::id() }}">
                 </form>
 
-        <div class="category-list">
+        <div id="category-block">
           <h2>カテゴリー</h2>
+           <div id="category-list">
             <ul>
-           @foreach ($post_main_categories as $post_main_category)
-            <li>{{ $post_main_category->main_category }}
-            <ul>
-             @foreach ($post_main_category->PostSubCategories as $post_sub_category)
-            <li>{{ $post_sub_category->sub_category }}
+              @foreach ($post_main_categories as $post_main_category)
+              <li>
+              <b>{{ $post_main_category->main_category }}</b>
+              </li>
+             <ul>
+              <li>
+               @foreach ($post_main_category->PostSubCategories as $post_sub_category)
+               {{ $post_sub_category->sub_category }}
+               @endforeach
+              </li>
+             </ul>
              @endforeach
-            </ul>
             </li>
-           @endforeach
-            </ul>
+           </ul>
+          </div>
         </div>
  </div>
 

@@ -22,6 +22,7 @@
 </head>
 <body>
   <header>
+    @yield('header')
   </header>
   <div id="container">
     @yield('content')

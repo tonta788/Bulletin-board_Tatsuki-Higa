@@ -20,22 +20,23 @@ header {
 
 .sidemenu {
   flex: auto;
-  text-align: right;
-  margin: 10px;
+  text-align: left;
+  margin: 0 5%;
 }
 
 .side {
   margin-top: 10px;
 }
 
-.category {
-  display: block;
-  margin: 0 0 0 auto;
-  text-align: right;
+#category-block {
+  margin: 10px 10px;
+  text-align: left;
+  display: table;
 }
 
-.category-list {
-  margin: 0 0 0 auto;
+#category-list>ul>li {
+  list-style-position: inside;
+  display: table;
 }
 
 .main-block {
@@ -43,7 +44,6 @@ header {
   flex-flow: column wrap;
   width: 60%;
 }
-
 
 .post-content {
   display: inline-block;
@@ -58,4 +58,32 @@ header {
 
 .favorited_comment {
   color: red;
+}
+
+.form-content {
+  margin-bottom: 30px;
+}
+
+.form {
+  width: 350px;
+  height: 50px;
+  margin: 10px;
+}
+
+.post-form {
+  width: 350px;
+  height: 200px;
+  margin: 10px;
+}
+
+.comment-block {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000;
+}
+
+.comment-form {
+  width: 400px;
+  height: 100px;
+  margin-top: 50px;
 }

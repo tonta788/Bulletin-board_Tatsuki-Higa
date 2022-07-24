@@ -148,7 +148,7 @@ class PostsController extends Controller
             'title' => 'required|string|max:100',
             'post' => 'required|string|max:5000',
         ]);
-        $validator->validate();
+
         $up_subcategory = $request->input('up_post_sub_category_id');
         $up_title = $request->input('up_title');
         $up_post = $request->input('up_post');
