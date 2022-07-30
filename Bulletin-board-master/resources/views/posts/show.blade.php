@@ -4,6 +4,7 @@
 <h1>掲示板詳細画面</h1>
 <div id="row">
  <div class="main-block">
+   <div>
     @if ($posts)
       <div>{{ $posts->user->username }}さん　
       {{ $posts->created_at->format('Y年m月d日') }}　
@@ -28,7 +29,7 @@
        </div>
       @endif
    @endif
-
+   </div>
 
   <div>
 
