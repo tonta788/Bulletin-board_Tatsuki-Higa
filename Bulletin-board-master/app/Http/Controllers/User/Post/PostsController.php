@@ -36,15 +36,20 @@ class PostsController extends Controller
         $posts = Post::find($id);
         $comments = PostComment::withCount('PostCommentFavorites')->get();
 
-        $data = [
+        $user=Actionlog::where('user_id')->first();
+
+        if(Actionlog::where('user_id',"=",$user)->exists()){
+            return view('posts.show');
+        }else{
+            $data = [
             'user_id' => Auth::id(),
             'post_id' => $id,
             'event_at' => date('Y-m-d'),
         ];
         Actionlog::create($data);
-
-        return view('posts.show',['posts'=>$posts,'comments' => $comments]);
     }
+    return view('posts.show',['posts'=>$posts,'comments' => $comments]);
+}
 
     public function updateshow(PostSubCategory $Sub_Categories,$id){
         $posts = Post::find($id);
@@ -194,6 +199,9 @@ class PostsController extends Controller
             ->orWhere('post', 'LIKE', "%{$keyword}%")
             ->orWhere('title', 'LIKE', "%{$keyword}%");
         })->withCount('PostFavorites')->get();
+    }
+    elseif(empty($keyword)){
+        return redirect('/top');
     }
 
         return view('posts.index', compact('posts','keyword'),['posts' => $posts,'main_categories' => $main_categories,'post_main_categories' => $postMainCategories]);
