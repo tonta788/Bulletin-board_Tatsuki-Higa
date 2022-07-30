@@ -36,10 +36,10 @@ class PostsController extends Controller
         $posts = Post::find($id);
         $comments = PostComment::withCount('PostCommentFavorites')->get();
 
-        $user=Actionlog::where('user_id')->first();
+        $user = Actionlog::where('user_id',Auth::id())->where('post_id',$id)->first();
 
-        if(Actionlog::where('user_id',"=",$user)->exists()){
-            return view('posts.show');
+        if(!empty($user)){
+            return view('posts.show',['posts'=>$posts,'comments' => $comments]);
         }else{
             $data = [
             'user_id' => Auth::id(),
