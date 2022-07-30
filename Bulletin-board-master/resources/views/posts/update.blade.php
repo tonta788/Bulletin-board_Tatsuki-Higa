@@ -19,7 +19,7 @@
 
       <label>サブカテゴリー</label>
       <div>
-       <select name="up_post_sub_category_id" class="form">
+       <select name="post_sub_category_id" class="form">
        @foreach($sub_category as $sub_category)
        <option value="{{ $sub_category->id }}">{{ $sub_category->sub_category }}</option>
        @endforeach
@@ -27,10 +27,10 @@
       </div>
 
       <label>タイトル</label>
-      <div><input type="text" name="up_title" value="{{ $posts->title }}" class="form"></div>
+      <div><input type="text" name="title" value="{{ $posts->title }}" class="form"></div>
 
       <label>投稿内容</label>
-      <div><input type="text" name="up_post" value="{{ $posts->post }}" class="post-form"></div>
+      <div><input type="text" name="post" value="{{ $posts->post }}" class="post-form"></div>
 
     <button type=submit class="btn btn-danger form">更新</button>
   </form>

@@ -74,11 +74,10 @@ class PostsController extends Controller
     }
 
     public function add(Request $request){
-        $validator = Validator::make($request->all(),[
-            'main_category' => 'required|string|max:100|unique:post_main_categories',
-        ]);
+        $rules = ['main_category' => 'required|string|max:100|unique:post_main_categories',];
 
-        $main_category = $request->input('newMainCategory');
+        $main_category = $request->input('main_category');
+        $this->validate($request, $rules);
 
         \DB::table('post_main_categories')->insert([
             'main_category' => $main_category,
@@ -88,13 +87,15 @@ class PostsController extends Controller
     }
 
     public function addsub(Request $request){
-       $validator = Validator::make($request->all(),[
+       $rules = [
             'post_main_category_id' => 'required',
             'sub_category' => 'required|string|max:100|unique:post_sub_categories',
-        ]);
+        ];
 
-        $main_category_id = $request->input('MainCategory');
-        $sub_category = $request->input('newSubCategory');
+        $main_category_id = $request->input('post_main_category_id');
+        $sub_category = $request->input('sub_category');
+
+        $this->validate($request, $rules);
 
         \DB::table('post_sub_categories')->insert([
             'post_main_category_id' => $main_category_id,
@@ -126,16 +127,16 @@ class PostsController extends Controller
 
     public function create(Request $request)
     {
-        $validator = validator::make($request->all(),[
+        $rules = [
             'post_sub_category_id' => 'required',
             'title' => 'required|string|max:100',
             'post' => 'required|string|max:5000',
-        ]);
-
-        $sub_category = $request->input('SubCategory');
-        $title = $request->input('newTitle');
-        $post = $request->input('newPost');
+        ];
+        $sub_category = $request->input('post_sub_category_id');
+        $title = $request->input('title');
+        $post = $request->input('post');
         $request-> user_id = $request->user()->id;
+        $this->validate($request, $rules);
         \DB::table('posts')->insert([
             'post_sub_category_id' => $sub_category,
             'title' => $title,
@@ -148,15 +149,16 @@ class PostsController extends Controller
 
 
     public function postupdate(Request $request,$id){
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'post_sub_category_id' => 'required',
             'title' => 'required|string|max:100',
             'post' => 'required|string|max:5000',
-        ]);
+        ];
 
-        $up_subcategory = $request->input('up_post_sub_category_id');
-        $up_title = $request->input('up_title');
-        $up_post = $request->input('up_post');
+        $up_subcategory = $request->input('post_sub_category_id');
+        $up_title = $request->input('title');
+        $up_post = $request->input('post');
+        $this->validate($request, $rules);
 
         \DB::table('posts')
             ->where('id', $id)

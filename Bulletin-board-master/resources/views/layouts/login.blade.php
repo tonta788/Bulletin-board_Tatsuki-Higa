@@ -31,7 +31,7 @@
     <header>
 
         <div id="head">
-        <button><a href="/top">投稿一覧</a></button>
+        <a href="/top" class="btn btn-primary">投稿一覧</a>
         <a href="/logout" class="btn btn-primary">ログアウト</a>
     </div>
 @yield('header')

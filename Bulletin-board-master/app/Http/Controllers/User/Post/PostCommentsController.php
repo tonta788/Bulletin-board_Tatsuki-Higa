@@ -19,13 +19,14 @@ class PostCommentsController extends Controller
     }
 
     public function create(Request $request){
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'comment' => 'required|string|max:2500',
-        ]);
+        ];
 
-        $comment = $request->input('newComment');
+        $comment = $request->input('comment');
         $user_id = $request->input('user_id');
         $post_id = $request->input('post_id');
+        $this->validate($request, $rules);
 
         \DB::table('post_comments')->insert([
             'user_id' => $user_id,
@@ -37,13 +38,13 @@ class PostCommentsController extends Controller
     }
 
     public function update(Request $request,$id){
-         $validator = Validator::make($request->all(), [
-            'upComment' => 'required|string|max:2500',
-        ]);
-        $validator->validate();
+         $rules = [
+            'comment' => 'required|string|max:2500',
+        ];
 
         $post_id = $request->input('post_id');
-        $up_comment = $request->input('upComment');
+        $up_comment = $request->input('comment');
+        $this->validate($request, $rules);
         \DB::table('post_comments')
             ->where('id', $id)
             ->update(

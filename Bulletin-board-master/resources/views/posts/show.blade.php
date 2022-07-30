@@ -74,7 +74,7 @@
       </div>
      @endif
       <div>
-        <input type="text" name="newComment" placeholder="コチラから入力できます" class="comment-form">
+        <input type="text" name="comment" placeholder="コチラから入力できます" class="comment-form">
         <input type="hidden" value="{{ Auth::id() }}" name="user_id">
         <input type="hidden" value="{{ $posts->id }}" name="post_id">
       </div>

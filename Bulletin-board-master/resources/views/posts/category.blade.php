@@ -15,7 +15,7 @@
          </div>
         @endif
            <label>新規メインカテゴリー</label>
-           <div><input type="text" name="newMainCategory" class="form"></div>
+           <div><input type="text" name="main_category" class="form"></div>
            <div><button type="submit" class="btn btn-danger form">登録</button></div>
        </form>
      </div>
@@ -25,7 +25,7 @@
          @csrf
          <label for="category-id">{{ __('メインカテゴリー') }}</label>
          <div>
-          <select name="MainCategory" class="form">
+          <select name="post_main_category_id" class="form">
             @foreach($main_categories as $main_categories)
             <option value="{{ $main_categories->id }}">{{ $main_categories->main_category }}</option>
             @endforeach
@@ -40,7 +40,7 @@
             </ul>
            </div>
           @endif
-         <div><input type="text" name="newSubCategory" class="form"></div>
+         <div><input type="text" name="sub_category" class="form"></div>
          <div><button type="submit" class="btn btn-danger form">登録</button></div>
        </form>
      </div>
