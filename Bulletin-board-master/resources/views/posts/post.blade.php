@@ -30,9 +30,7 @@
      <div><input type="text" name="title" class="form"></div>
      <div><label>投稿内容</label></div>
      <div><input type="text" name="post" class="post-form"></div>
-     @if(Auth::user()->admin_role == 1)
      <button type=submit class="btn btn-danger form">投稿</button>
-     @endif
     </form>
  </div>
 </div>
