@@ -58,8 +58,5 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    },
-    "require": {
-        "monolog/monolog": "1.0.*"
     }
 }
